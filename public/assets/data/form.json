@@ -1,0 +1,1830 @@
+{
+    "meta": {
+        "formId": "buildingfit_gym_audit_tunisia",
+        "version": "2.2.0",
+        "locales": [
+            "fr",
+            "ar"
+        ],
+        "defaultLocale": "fr",
+        "country": "TN"
+    },
+    "sections": [
+        {
+            "id": "general",
+            "title": {
+                "fr": "Informations générales",
+                "ar": "المعلومات العامة"
+            },
+            "description": {
+                "fr": "Identité et contacts de la salle.",
+                "ar": "هوية القاعة وبيانات التواصل."
+            },
+            "fields": [
+                {
+                    "key": "gymName",
+                    "type": "text",
+                    "required": true,
+                    "label": {
+                        "fr": "Nom de la salle",
+                        "ar": "اسم القاعة"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Building Fit Gym",
+                        "ar": "مثال: Building Fit Gym"
+                    }
+                },
+                {
+                    "key": "addressDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Adresse",
+                        "ar": "العنوان"
+                    }
+                },
+                {
+                    "key": "addressGovernorate",
+                    "type": "governorate",
+                    "required": true,
+                    "label": {
+                        "fr": "Gouvernorat",
+                        "ar": "الولاية"
+                    },
+                    "placeholder": {
+                        "fr": "Sélectionnez le gouvernorat",
+                        "ar": "اختر الولاية"
+                    }
+                },
+                {
+                    "key": "addressCity",
+                    "type": "city",
+                    "required": true,
+                    "label": {
+                        "fr": "Ville / Délégation",
+                        "ar": "المدينة / المعتمدية"
+                    },
+                    "placeholder": {
+                        "fr": "Sélectionnez la ville",
+                        "ar": "اختر المدينة"
+                    },
+                    "governorateKey": "addressGovernorate"
+                },
+                {
+                    "key": "addressStreet",
+                    "type": "textarea",
+                    "required": true,
+                    "label": {
+                        "fr": "Adresse complète",
+                        "ar": "العنوان الكامل"
+                    },
+                    "placeholder": {
+                        "fr": "Numéro, rue, bâtiment, étage...",
+                        "ar": "رقم، شارع، مبنى، طابق..."
+                    },
+                    "rows": 2
+                },
+                {
+                    "key": "addressPostalCode",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Code postal",
+                        "ar": "الرمز البريدي"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: 2000",
+                        "ar": "مثال: 2000"
+                    },
+                    "min": 1000,
+                    "max": 9999
+                },
+                {
+                    "key": "contactDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Coordonnées",
+                        "ar": "بيانات التواصل"
+                    }
+                },
+                {
+                    "key": "phone",
+                    "type": "tel",
+                    "required": true,
+                    "label": {
+                        "fr": "Téléphone principal",
+                        "ar": "الهاتف الأساسي"
+                    },
+                    "placeholder": {
+                        "fr": "+216 XX XXX XXX",
+                        "ar": "+216 XX XXX XXX"
+                    }
+                },
+                {
+                    "key": "phoneSecondary",
+                    "type": "tel",
+                    "required": false,
+                    "label": {
+                        "fr": "Téléphone secondaire",
+                        "ar": "هاتف ثانوي"
+                    },
+                    "placeholder": {
+                        "fr": "+216 XX XXX XXX",
+                        "ar": "+216 XX XXX XXX"
+                    }
+                },
+                {
+                    "key": "email",
+                    "type": "email",
+                    "required": false,
+                    "label": {
+                        "fr": "Email",
+                        "ar": "البريد الإلكتروني"
+                    },
+                    "placeholder": {
+                        "fr": "contact@gym.tn",
+                        "ar": "contact@gym.tn"
+                    }
+                },
+                {
+                    "key": "website",
+                    "type": "text",
+                    "required": false,
+                    "label": {
+                        "fr": "Site web",
+                        "ar": "الموقع الإلكتروني"
+                    },
+                    "placeholder": {
+                        "fr": "https://...",
+                        "ar": "https://..."
+                    }
+                },
+                {
+                    "key": "managerDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Responsable & Audit",
+                        "ar": "المسؤول والتدقيق"
+                    }
+                },
+                {
+                    "key": "managerName",
+                    "type": "text",
+                    "required": true,
+                    "label": {
+                        "fr": "Responsable / Gérant",
+                        "ar": "المسؤول / المدير"
+                    },
+                    "placeholder": {
+                        "fr": "Nom complet",
+                        "ar": "الاسم الكامل"
+                    }
+                },
+                {
+                    "key": "managerPhone",
+                    "type": "tel",
+                    "required": false,
+                    "label": {
+                        "fr": "Téléphone du responsable",
+                        "ar": "هاتف المسؤول"
+                    },
+                    "placeholder": {
+                        "fr": "+216 XX XXX XXX",
+                        "ar": "+216 XX XXX XXX"
+                    }
+                },
+                {
+                    "key": "auditDate",
+                    "type": "date",
+                    "required": true,
+                    "label": {
+                        "fr": "Date de l'audit",
+                        "ar": "تاريخ التدقيق"
+                    }
+                },
+                {
+                    "key": "auditorName",
+                    "type": "text",
+                    "required": true,
+                    "label": {
+                        "fr": "Nom de l'auditeur",
+                        "ar": "اسم المدقق"
+                    },
+                    "placeholder": {
+                        "fr": "Nom complet",
+                        "ar": "الاسم الكامل"
+                    }
+                }
+            ]
+        },
+        {
+            "id": "legal",
+            "title": {
+                "fr": "Conformité administrative & légale",
+                "ar": "الامتثال الإداري والقانوني"
+            },
+            "description": {
+                "fr": "Documents et autorisations obligatoires en Tunisie.",
+                "ar": "الوثائق والتراخيص الإلزامية في تونس."
+            },
+            "weight": 20,
+            "fields": [
+                {
+                    "key": "operatingLicense",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Conformité au cahier des charges",
+                        "ar": "مطابقة لكراس الشروط"
+                    },
+                    "points": 3,
+                    "critical": true
+                },
+                {
+                    "key": "tradeRegister",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Registre de commerce (RNE)",
+                        "ar": "السجل التجاري"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "taxId",
+                    "type": "text",
+                    "required": false,
+                    "label": {
+                        "fr": "Matricule fiscale",
+                        "ar": "المعرف الجبائي"
+                    },
+                    "placeholder": {
+                        "fr": "XXXXXXX/X/X/X/XXX",
+                        "ar": "XXXXXXX/X/X/X/XXX"
+                    }
+                },
+                {
+                    "key": "liabilityInsurance",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Assurance responsabilité civile",
+                        "ar": "تأمين المسؤولية المدنية"
+                    },
+                    "points": 3,
+                    "critical": true
+                },
+                {
+                    "key": "insuranceExpiry",
+                    "type": "date",
+                    "required": false,
+                    "label": {
+                        "fr": "Date d'expiration de l'assurance",
+                        "ar": "تاريخ انتهاء التأمين"
+                    }
+                },
+                {
+                    "key": "taxCompliance",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Conformité fiscale (à jour)",
+                        "ar": "الامتثال الجبائي (محدّث)"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "mandatoryPosters",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Affichages obligatoires présents",
+                        "ar": "الملصقات الإلزامية متوفرة"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "legalNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations légales",
+                        "ar": "ملاحظات قانونية"
+                    },
+                    "placeholder": {
+                        "fr": "Documents manquants, dates de renouvellement...",
+                        "ar": "الوثائق المفقودة، تواريخ التجديد..."
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "infrastructure",
+            "title": {
+                "fr": "Infrastructure & aménagement",
+                "ar": "البنية التحتية والتهيئة"
+            },
+            "weight": 15,
+            "fields": [
+                {
+                    "key": "totalArea",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Superficie totale (m²)",
+                        "ar": "المساحة الإجمالية (م²)"
+                    },
+                    "min": 0,
+                    "placeholder": {
+                        "fr": "Ex: 250",
+                        "ar": "مثال: 250"
+                    }
+                },
+                {
+                    "key": "spaceDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Espaces & superficies",
+                        "ar": "المساحات والمساحات بالمتر"
+                    }
+                },
+                {
+                    "key": "fitnessPlatformsCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre de plateaux de fitness",
+                        "ar": "عدد فضاءات اللياقة (البلاتوهات)"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "fitnessPlatformsAreas",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Superficie des plateaux (détails)",
+                        "ar": "مساحة فضاءات اللياقة (تفاصيل)"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Plateau 1: 80 m², Plateau 2: 60 m²...",
+                        "ar": "مثال: بلاتو 1: 80م²، بلاتو 2: 60م²..."
+                    },
+                    "rows": 3
+                },
+                {
+                    "key": "classRoomsCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre de salles de cours",
+                        "ar": "عدد قاعات الدروس"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "classRoomsAreas",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Superficie des salles de cours (détails)",
+                        "ar": "مساحة قاعات الدروس (تفاصيل)"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Salle 1: 45 m², Salle 2: 35 m²...",
+                        "ar": "مثال: قاعة 1: 45م²، قاعة 2: 35م²..."
+                    },
+                    "rows": 3
+                },
+                {
+                    "key": "lockerRoomsCountInfra",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre de vestiaires",
+                        "ar": "عدد غرف تبديل الملابس"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "lockerRoomsAreasInfra",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Superficie des vestiaires (détails)",
+                        "ar": "مساحة غرف الملابس (تفاصيل)"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Vestiaire H: 30 m², Vestiaire F: 28 m²...",
+                        "ar": "مثال: رجال: 30م²، نساء: 28م²..."
+                    },
+                    "rows": 3
+                },
+                {
+                    "key": "showerCabinsCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre de cabines de douche",
+                        "ar": "عدد كبائن الاستحمام"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "infraQualityDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Qualité & état",
+                        "ar": "الجودة والحالة"
+                    }
+                },
+                {
+                    "key": "circulationZoning",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Circulation et zoning adaptés",
+                        "ar": "الحركة وتقسيم المساحات مناسب"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "lighting",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Qualité de l'éclairage",
+                        "ar": "جودة الإضاءة"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellente",
+                                "ar": "ممتازة"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bonne",
+                                "ar": "جيدة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyenne",
+                                "ar": "متوسطة"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "insufficient",
+                            "label": {
+                                "fr": "Insuffisante",
+                                "ar": "ضعيفة"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "ventilation",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Ventilation / Climatisation",
+                        "ar": "التهوية / التكييف"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellente",
+                                "ar": "ممتازة"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bonne",
+                                "ar": "جيدة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyenne",
+                                "ar": "متوسطة"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "insufficient",
+                            "label": {
+                                "fr": "Insuffisante",
+                                "ar": "ضعيفة"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "sportsFloor",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Revêtement de sol adapté au sport",
+                        "ar": "أرضية مناسبة للرياضة"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "wallsCeilingsState",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "État général des murs et plafonds",
+                        "ar": "حالة الجدران والأسقف"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellent",
+                                "ar": "ممتازة"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bon",
+                                "ar": "جيدة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyen",
+                                "ar": "متوسطة"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "bad",
+                            "label": {
+                                "fr": "Mauvais",
+                                "ar": "سيئة"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "mirrorQuality",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Miroirs en bon état",
+                        "ar": "المرايا بحالة جيدة"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "infraNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Autres / remarques (infrastructure)",
+                        "ar": "ملاحظات / إضافات (البنية التحتية)"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "equipment",
+            "title": {
+                "fr": "Équipements sportifs",
+                "ar": "المعدات الرياضية"
+            },
+            "weight": 10,
+            "fields": [
+                {
+                    "key": "mainBrand",
+                    "type": "text",
+                    "required": false,
+                    "label": {
+                        "fr": "Marque principale des machines",
+                        "ar": "العلامة الرئيسية للأجهزة"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Technogym, Life Fitness...",
+                        "ar": "مثال: Technogym, Life Fitness..."
+                    }
+                },
+                {
+                    "key": "avgMachineAge",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Âge moyen des machines (années)",
+                        "ar": "متوسط عمر الأجهزة (سنوات)"
+                    },
+                    "min": 0,
+                    "max": 30,
+                    "scoreRanges": [
+                        {
+                            "max": 3,
+                            "points": 3
+                        },
+                        {
+                            "max": 7,
+                            "points": 2
+                        },
+                        {
+                            "max": 12,
+                            "points": 1
+                        },
+                        {
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "machineCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre total de machines",
+                        "ar": "العدد الإجمالي للأجهزة"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "machinesWorking",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Machines en bon état de fonctionnement",
+                        "ar": "الأجهزة تعمل بحالة جيدة"
+                    },
+                    "points": 3
+                },
+                {
+                    "key": "regularMaintenance",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Maintenance régulière documentée",
+                        "ar": "صيانة منتظمة موثقة"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "accessoriesAvailability",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Disponibilité des accessoires",
+                        "ar": "توفر الإكسسوارات"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellente",
+                                "ar": "ممتازة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "sufficient",
+                            "label": {
+                                "fr": "Suffisante",
+                                "ar": "كافية"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "insufficient",
+                            "label": {
+                                "fr": "Insuffisante",
+                                "ar": "غير كافية"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "usageSignage",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Signalétique d'utilisation présente",
+                        "ar": "إرشادات الاستخدام متوفرة"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "equipmentNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations équipements",
+                        "ar": "ملاحظات المعدات"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "hygiene",
+            "title": {
+                "fr": "Hygiène & propreté",
+                "ar": "النظافة"
+            },
+            "weight": 15,
+            "fields": [
+                {
+                    "key": "generalCleanliness",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Propreté générale de la salle",
+                        "ar": "نظافة القاعة بشكل عام"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellente",
+                                "ar": "ممتازة"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bonne",
+                                "ar": "جيدة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyenne",
+                                "ar": "متوسطة"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "bad",
+                            "label": {
+                                "fr": "Mauvaise",
+                                "ar": "سيئة"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "machineCleaning",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Fréquence de nettoyage des machines",
+                        "ar": "وتيرة تنظيف الأجهزة"
+                    },
+                    "options": [
+                        {
+                            "value": "daily",
+                            "label": {
+                                "fr": "Quotidien",
+                                "ar": "يومي"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "occasional",
+                            "label": {
+                                "fr": "Occasionnel",
+                                "ar": "أحيانًا"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "rare",
+                            "label": {
+                                "fr": "Rare",
+                                "ar": "نادر"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "floorsSafe",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Sols propres et sécurisés",
+                        "ar": "الأرضيات نظيفة وآمنة"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "disinfectantsAvailable",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Produits désinfectants disponibles",
+                        "ar": "مطهرات متوفرة للزبائن"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "lockerRoomDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Vestiaires & sanitaires",
+                        "ar": "غرف تغيير الملابس ودورات المياه"
+                    }
+                },
+                {
+                    "key": "lockerRoomsClean",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Vestiaires propres",
+                        "ar": "غرف الملابس نظيفة"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "showersWorking",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Douches fonctionnelles",
+                        "ar": "الاستحمام يعمل"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "hotWater",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Eau chaude disponible",
+                        "ar": "ماء ساخن متوفر"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "toiletsClean",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Toilettes propres et fonctionnelles",
+                        "ar": "دورات المياه نظيفة وتعمل"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "odorsHumidity",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Odeurs / humidité",
+                        "ar": "روائح / رطوبة"
+                    },
+                    "options": [
+                        {
+                            "value": "none",
+                            "label": {
+                                "fr": "Aucune",
+                                "ar": "لا يوجد"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "light",
+                            "label": {
+                                "fr": "Légère",
+                                "ar": "خفيفة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "moderate",
+                            "label": {
+                                "fr": "Modérée",
+                                "ar": "متوسطة"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "high",
+                            "label": {
+                                "fr": "Importante",
+                                "ar": "كبيرة"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "hygieneNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations hygiène",
+                        "ar": "ملاحظات النظافة"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "safety",
+            "title": {
+                "fr": "Sécurité",
+                "ar": "السلامة"
+            },
+            "weight": 20,
+            "fields": [
+                {
+                    "key": "emergencyExitsVisible",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Issues de secours visibles et dégagées",
+                        "ar": "مخارج الطوارئ واضحة ومفتوحة"
+                    },
+                    "points": 3,
+                    "critical": true
+                },
+                {
+                    "key": "extinguishersValid",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Extincteurs présents et valides",
+                        "ar": "مطافئ موجودة وصالحة"
+                    },
+                    "points": 3,
+                    "critical": true
+                },
+                {
+                    "key": "extinguisherCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre d'extincteurs",
+                        "ar": "عدد المطافئ"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "firstAidKit",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Trousse de premiers secours accessible",
+                        "ar": "عدة إسعافات أولية متاحة"
+                    },
+                    "points": 2,
+                    "critical": true
+                },
+                {
+                    "key": "emergencyProcedurePosted",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Procédure d'urgence affichée",
+                        "ar": "إجراءات الطوارئ معلّقة"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "staffFirstAidTrained",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Personnel formé aux premiers secours",
+                        "ar": "الطاقم مدرّب على الإسعافات"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "safetyNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations sécurité",
+                        "ar": "ملاحظات السلامة"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "hr",
+            "title": {
+                "fr": "Ressources humaines",
+                "ar": "الموارد البشرية"
+            },
+            "weight": 10,
+            "fields": [
+                {
+                    "key": "staffCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre total de personnel",
+                        "ar": "العدد الإجمالي للموظفين"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "coachVacataireCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre de coachs vacataires",
+                        "ar": "عدد المدربين المتعاقدين (بالساعة)"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "coachPermanentCount",
+                    "type": "number",
+                    "required": false,
+                    "label": {
+                        "fr": "Nombre de coachs permanents",
+                        "ar": "عدد المدربين القارّين"
+                    },
+                    "min": 0
+                },
+                {
+                    "key": "certifiedCoaches",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Diplômes et certifications valides",
+                        "ar": "شهادات واعتمادات صالحة"
+                    },
+                    "points": 3
+                },
+                {
+                    "key": "coachPresence",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Présence d'un coach en salle",
+                        "ar": "تواجد مدرب في القاعة"
+                    },
+                    "options": [
+                        {
+                            "value": "permanent",
+                            "label": {
+                                "fr": "Permanente (toute la journée)",
+                                "ar": "دائم (طوال اليوم)"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "partial",
+                            "label": {
+                                "fr": "Partielle (heures de pointe)",
+                                "ar": "جزئي (أوقات الذروة)"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "rare",
+                            "label": {
+                                "fr": "Rare / Sur demande",
+                                "ar": "نادر / عند الطلب"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "none",
+                            "label": {
+                                "fr": "Absente",
+                                "ar": "غير موجود"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "customerRelation",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Qualité de l'accueil et relation client",
+                        "ar": "جودة الاستقبال وخدمة العملاء"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellent",
+                                "ar": "ممتاز"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bon",
+                                "ar": "جيد"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyen",
+                                "ar": "متوسط"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "weak",
+                            "label": {
+                                "fr": "Faible",
+                                "ar": "ضعيف"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "staffUniformPresent",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Personnel en uniforme identifiable",
+                        "ar": "الموظفون يرتدون زيًا موحدًا"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "hrNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations RH",
+                        "ar": "ملاحظات الموارد البشرية"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "customerExperience",
+            "title": {
+                "fr": "Expérience client",
+                "ar": "تجربة العميل"
+            },
+            "weight": 5,
+            "fields": [
+                {
+                    "key": "welcomeQuality",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Qualité de l'accueil",
+                        "ar": "جودة الاستقبال"
+                    },
+                    "options": [
+                        {
+                            "value": "very_good",
+                            "label": {
+                                "fr": "Très bon",
+                                "ar": "جيد جدًا"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bon",
+                                "ar": "جيد"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyen",
+                                "ar": "متوسط"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "bad",
+                            "label": {
+                                "fr": "Mauvais",
+                                "ar": "سيء"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "atmosphere",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Ambiance (musique, énergie, décoration)",
+                        "ar": "الأجواء (الموسيقى، الطاقة، الديكور)"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellente",
+                                "ar": "ممتازة"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "adapted",
+                            "label": {
+                                "fr": "Adaptée",
+                                "ar": "مناسبة"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyenne",
+                                "ar": "متوسطة"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "inadequate",
+                            "label": {
+                                "fr": "Inadaptée",
+                                "ar": "غير مناسبة"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "peakCrowd",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Affluence aux heures de pointe",
+                        "ar": "الاكتظاظ في أوقات الذروة"
+                    },
+                    "options": [
+                        {
+                            "value": "comfortable",
+                            "label": {
+                                "fr": "Confortable",
+                                "ar": "مريح"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "medium",
+                            "label": {
+                                "fr": "Moyen",
+                                "ar": "متوسط"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "high",
+                            "label": {
+                                "fr": "Élevé (surpeuplement)",
+                                "ar": "مرتفع (اكتظاظ)"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "parkingAvailability",
+                    "type": "choice",
+                    "required": false,
+                    "label": {
+                        "fr": "Disponibilité parking",
+                        "ar": "توفر موقف سيارات"
+                    },
+                    "options": [
+                        {
+                            "value": "dedicated",
+                            "label": {
+                                "fr": "Parking dédié",
+                                "ar": "موقف خاص"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "nearby",
+                            "label": {
+                                "fr": "Parking à proximité",
+                                "ar": "موقف قريب"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "difficult",
+                            "label": {
+                                "fr": "Difficile",
+                                "ar": "صعب"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "none",
+                            "label": {
+                                "fr": "Aucun",
+                                "ar": "لا يوجد"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "clientFeedbackCollected",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Feedback clients recueilli régulièrement",
+                        "ar": "يتم جمع آراء العملاء بانتظام"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "cxNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations expérience client",
+                        "ar": "ملاحظات تجربة العميل"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "marketing",
+            "title": {
+                "fr": "Offre commerciale & marketing",
+                "ar": "العرض التجاري والتسويق"
+            },
+            "weight": 5,
+            "fields": [
+                {
+                    "key": "subscriptionAccessType",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Type d'accès",
+                        "ar": "نوع الوصول"
+                    },
+                    "options": [
+                        {
+                            "value": "free_access",
+                            "label": {
+                                "fr": "Accès libre",
+                                "ar": "دخول حر"
+                            }
+                        },
+                        {
+                            "value": "activity_access",
+                            "label": {
+                                "fr": "Accès par activité",
+                                "ar": "حسب النشاط"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "key": "freeAccessDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Accès libre — Abonnements & packs",
+                        "ar": "الدخول الحر — الاشتراكات والباقات"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "freeAccessMonthly",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Mensuel disponible",
+                        "ar": "اشتراك شهري متوفر"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "freeAccessQuarterly",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Trimestriel disponible",
+                        "ar": "اشتراك فصلي متوفر"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "freeAccessSemiAnnual",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Semestriel disponible",
+                        "ar": "اشتراك نصف سنوي متوفر"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "freeAccessAnnual",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Annuel disponible",
+                        "ar": "اشتراك سنوي متوفر"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "packFamily",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Pack familial",
+                        "ar": "باك عائلي"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "packKids",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Pack kids",
+                        "ar": "باك أطفال"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "packCouple",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Pack couple",
+                        "ar": "باك زوجي"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "packStudent",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Pack étudiant",
+                        "ar": "باك طلبة"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "freeAccessNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Détails (tarifs / conditions — accès libre)",
+                        "ar": "تفاصيل (الأسعار / الشروط — دخول حر)"
+                    },
+                    "rows": 3,
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "free_access"
+                    }
+                },
+                {
+                    "key": "activityAccessDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Accès par activité — Activités proposées",
+                        "ar": "حسب النشاط — الأنشطة المتوفرة"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "activity_access"
+                    }
+                },
+                {
+                    "key": "activityMusculation",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Musculation",
+                        "ar": "كمال أجسام / حديد"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "activity_access"
+                    }
+                },
+                {
+                    "key": "activityCoursCollectifs",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Cours (collectifs)",
+                        "ar": "حصص (جماعية)"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "activity_access"
+                    }
+                },
+                {
+                    "key": "activityCardio",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Cardio",
+                        "ar": "كارديو"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "activity_access"
+                    }
+                },
+                {
+                    "key": "activityMartialArts",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Arts martiaux",
+                        "ar": "فنون قتالية"
+                    },
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "activity_access"
+                    }
+                },
+                {
+                    "key": "activityAccessNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Détails (tarifs / packs — accès par activité)",
+                        "ar": "تفاصيل (الأسعار / الباقات — حسب النشاط)"
+                    },
+                    "rows": 3,
+                    "visibleWhen": {
+                        "key": "subscriptionAccessType",
+                        "equals": "activity_access"
+                    }
+                },
+                {
+                    "key": "pricingMarketFit",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Tarifs cohérents avec le marché tunisien",
+                        "ar": "الأسعار مناسبة للسوق التونسي"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "promotions",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Promotions / offres spéciales actives",
+                        "ar": "عروض / تخفيضات نشطة"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "digitalPresence",
+                    "type": "choice",
+                    "required": true,
+                    "label": {
+                        "fr": "Présence digitale (Facebook, Instagram, site web)",
+                        "ar": "الحضور الرقمي (فيسبوك، إنستغرام، موقع)"
+                    },
+                    "options": [
+                        {
+                            "value": "excellent",
+                            "label": {
+                                "fr": "Excellente (actif et engageant)",
+                                "ar": "ممتاز (نشط وجذاب)"
+                            },
+                            "points": 4
+                        },
+                        {
+                            "value": "good",
+                            "label": {
+                                "fr": "Bonne",
+                                "ar": "جيد"
+                            },
+                            "points": 3
+                        },
+                        {
+                            "value": "average",
+                            "label": {
+                                "fr": "Moyenne",
+                                "ar": "متوسط"
+                            },
+                            "points": 2
+                        },
+                        {
+                            "value": "weak",
+                            "label": {
+                                "fr": "Faible",
+                                "ar": "ضعيف"
+                            },
+                            "points": 1
+                        },
+                        {
+                            "value": "none",
+                            "label": {
+                                "fr": "Absente",
+                                "ar": "غير موجود"
+                            },
+                            "points": 0
+                        }
+                    ]
+                },
+                {
+                    "key": "visualIdentityCoherent",
+                    "type": "toggle",
+                    "required": true,
+                    "label": {
+                        "fr": "Identité visuelle cohérente (logo, couleurs, signalétique)",
+                        "ar": "الهوية البصرية متناسقة (شعار، ألوان، لافتات)"
+                    },
+                    "points": 2
+                },
+                {
+                    "key": "loyaltyProgram",
+                    "type": "toggle",
+                    "required": false,
+                    "label": {
+                        "fr": "Programme de fidélité existant",
+                        "ar": "برنامج ولاء موجود"
+                    },
+                    "points": 1
+                },
+                {
+                    "key": "marketingNotes",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Observations marketing",
+                        "ar": "ملاحظات التسويق"
+                    },
+                    "rows": 4
+                }
+            ]
+        },
+        {
+            "id": "overall",
+            "title": {
+                "fr": "Évaluation globale",
+                "ar": "التقييم العام"
+            },
+            "fields": [
+                {
+                    "key": "strengths",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Points forts majeurs",
+                        "ar": "نقاط القوة الرئيسية"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Équipements récents, personnel qualifié, ambiance motivante...",
+                        "ar": "مثال: معدات حديثة، موظفون مؤهلون، أجواء محفزة..."
+                    },
+                    "rows": 3
+                },
+                {
+                    "key": "improvements",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Points à améliorer en priorité",
+                        "ar": "نقاط للتحسين بشكل عاجل"
+                    },
+                    "placeholder": {
+                        "fr": "Ex: Ventilation, propreté vestiaires, signalétique sécurité...",
+                        "ar": "مثال: التهوية، نظافة الغرف، لافتات السلامة..."
+                    },
+                    "rows": 3
+                }
+            ]
+        },
+        {
+            "id": "recommendations",
+            "title": {
+                "fr": "Recommandations de l'auditeur",
+                "ar": "توصيات المدقق"
+            },
+            "fields": [
+                {
+                    "key": "recommendationsText",
+                    "type": "textarea",
+                    "required": false,
+                    "label": {
+                        "fr": "Recommandations détaillées",
+                        "ar": "التوصيات التفصيلية"
+                    },
+                    "placeholder": {
+                        "fr": "Actions concrètes à mettre en place pour améliorer la salle...",
+                        "ar": "إجراءات ملموسة لتحسين القاعة..."
+                    },
+                    "rows": 6
+                },
+                {
+                    "key": "followUpDate",
+                    "type": "date",
+                    "required": false,
+                    "label": {
+                        "fr": "Date de suivi recommandée",
+                        "ar": "تاريخ المتابعة الموصى به"
+                    }
+                },
+                {
+                    "key": "signatureDivider",
+                    "type": "divider",
+                    "label": {
+                        "fr": "Signatures",
+                        "ar": "التوقيعات"
+                    }
+                },
+                {
+                    "key": "auditorSignature",
+                    "type": "signature",
+                    "required": false,
+                    "label": {
+                        "fr": "Signature de l'auditeur",
+                        "ar": "توقيع المدقق"
+                    }
+                },
+                {
+                    "key": "managerSignature",
+                    "type": "signature",
+                    "required": false,
+                    "label": {
+                        "fr": "Signature du responsable de la salle",
+                        "ar": "توقيع مسؤول القاعة"
+                    }
+                }
+            ]
+        }
+    ]
+}

@@ -1,0 +1,187 @@
+/* ========================================
+   DESIGN SWITCHER — Floating Component
+   ======================================== */
+:host {
+  /* Variables locales pour un tweaking facile sans toucher au global */
+  --sw-height: 44px;
+  --sw-padding: 4px;
+  --sw-btn-size: 36px;
+  --sw-radius: 99px;
+  --sw-gap: 4px;
+  
+  /* Calcul de la position de l'indicateur (pill) */
+  --sw-pill-size: var(--sw-btn-size);
+  --sw-step: calc(var(--sw-btn-size) + var(--sw-gap));
+
+  display: block;
+  isolation: isolate; /* Crée un nouveau contexte d'empilement */
+}
+
+.bf-wizard__design-switcher {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sw-gap);
+  padding: var(--sw-padding);
+
+  /* Glassmorphism Premium */
+  background: rgba(255, 255, 255, 0.65); /* Fallback */
+  background: color-mix(in srgb, var(--bf-surface-elevated) 65%, transparent);
+  backdrop-filter: blur(12px) saturate(110%);
+  -webkit-backdrop-filter: blur(12px) saturate(110%);
+  
+  border: 1px solid rgba(255, 255, 255, 0.12); /* Bordure subtile */
+  border-radius: var(--sw-radius);
+  
+  /* Ombre douce et élevée */
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.05),
+    0 10px 15px -3px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.2); /* Highlight interne */
+
+  position: relative; /* Pour l'indicateur absolu */
+  transition: 
+    background 0.3s ease, 
+    box-shadow 0.3s ease,
+    transform 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+  /* Dark mode spécifique via le parent ou context */
+  @media (prefers-color-scheme: dark) {
+    background: rgba(20, 20, 20, 0.65);
+    border-color: rgba(255, 255, 255, 0.08);
+    box-shadow: 
+      0 4px 12px rgba(0, 0, 0, 0.3),
+      inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  }
+
+  /* Hover effect sur le container global */
+  &:hover {
+    background: color-mix(in srgb, var(--bf-surface-elevated) 75%, transparent);
+    box-shadow: 
+      0 10px 25px -5px rgba(0, 0, 0, 0.1),
+      0 8px 10px -6px rgba(0, 0, 0, 0.05);
+    transform: translateY(-1px);
+  }
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+.bf-design-btn {
+  position: relative;
+  z-index: 2; /* Au-dessus de l'indicateur */
+  
+  appearance: none;
+  border: none;
+  background: transparent;
+  padding: 0;
+  margin: 0;
+  
+  width: var(--sw-btn-size);
+  height: var(--sw-btn-size);
+  border-radius: 50%;
+  
+  display: grid;
+  place-items: center;
+  
+  color: var(--bf-muted, #64748b);
+  cursor: pointer;
+  transition: color 0.2s ease;
+
+  /* SVG Icon Styles */
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  /* --- States --- */
+  
+  /* Hover (seulement si non actif) */
+  &:hover:not(.bf-design-btn--active) {
+    color: var(--bf-text, #0f172a);
+    background-color: rgba(0, 0, 0, 0.03); /* Feedback tactile subtil */
+  }
+
+  /* Active State (Selectionné) */
+  &.bf-design-btn--active {
+    color: #ffffff; /* Toujours blanc sur l'indicateur rouge */
+    cursor: default;
+    
+    svg {
+      transform: scale(1.1);
+      filter: drop-shadow(0 1px 2px rgba(0,0,0,0.1));
+    }
+  }
+
+  /* Focus Visible (Accessibilité Clavier) */
+  &:focus-visible {
+    outline: none;
+  }
+  
+  /* On ajoute un ring focus sur le container parent ou un pseudo-element pour ne pas casser le design rond */
+  &:focus-visible::after {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 2px solid var(--bf-focus, #3b82f6);
+  }
+}
+
+/* ========================================
+   INDICATOR (The Sliding Pill)
+   ======================================== */
+.bf-design-indicator {
+  position: absolute;
+  top: var(--sw-padding);
+  left: var(--sw-padding);
+  z-index: 1; /* Derrière le texte/icône */
+  
+  width: var(--sw-pill-size);
+  height: var(--sw-pill-size);
+  border-radius: 50%;
+  
+  /* Gradient rouge signature */
+  background: linear-gradient(135deg, var(--bf-red, #ef4444), var(--bf-red-bright, #f87171));
+  
+  /* Glow rouge */
+  box-shadow: 
+    0 2px 8px rgba(220, 38, 38, 0.3),
+    inset 0 -1px 1px rgba(0, 0, 0, 0.1),
+    inset 0 1px 1px rgba(255, 255, 255, 0.3);
+
+  /* Animation de glissement fluide */
+  transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  will-change: transform;
+
+  /* Logique de positionnement basée sur l'attribut data-design */
+  /* Position 1: Circular (0 offset) */
+  &[data-design="circular"] {
+    transform: translateX(0);
+  }
+
+  /* Position 2: Wave (1 step) */
+  &[data-design="wave"] {
+    transform: translateX(var(--sw-step));
+  }
+
+  /* Position 3: Metro (2 steps) */
+  &[data-design="metro"] {
+    transform: translateX(calc(var(--sw-step) * 2));
+  }
+}
+
+/* ========================================
+   RTL SUPPORT (Angular Context)
+   ======================================== */
+:host-context([dir="rtl"]) {
+  .bf-design-indicator {
+    left: auto;
+    right: var(--sw-padding);
+    
+    /* Inversion des translations pour RTL */
+    &[data-design="circular"] { transform: translateX(0); }
+    &[data-design="wave"] { transform: translateX(calc(var(--sw-step) * -1)); }
+    &[data-design="metro"] { transform: translateX(calc(var(--sw-step) * -2)); }
+  }
+}

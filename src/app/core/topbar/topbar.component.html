@@ -1,0 +1,63 @@
+<header class="bf-topbar" [class.is-scrolled]="scrolled" [attr.dir]="i18n.dir" [attr.data-theme]="theme.current"
+  [attr.data-locale]="i18n.locale" role="banner">
+  <div class="bf-topbar__inner">
+
+    <a class="bf-brand" [routerLink]="signedIn ? '/audits' : '/login'" aria-label="Building Fit">
+      <div class="bf-brand__mark">
+        <img src="assets/imgs/building-fit-logo.jpg" alt="" loading="eager" width="54" height="54" />
+        <span class="bf-brand__glow" aria-hidden="true"></span>
+      </div>
+      <div class="bf-brand__text">
+        <span class="bf-brand__name">BUILDING FIT</span>
+        <span class="bf-brand__sub">Professional Audit</span>
+      </div>
+    </a>
+
+    <div class="bf-topbar__actions">
+
+      <a *ngIf="signedIn" class="bf-navlink" routerLink="/audits" routerLinkActive="is-active"
+        [attr.aria-label]="i18n.tr('Audits', 'التدقيقات')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2M9 12h6M9 16h4"
+            stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>{{ i18n.tr('Audits', 'التدقيقات') }}</span>
+      </a>
+
+      <div class="bf-seg" role="group" [attr.aria-label]="i18n.tr('Sélection de langue', 'اختيار اللغة')">
+        <button type="button" class="bf-seg__btn" [class.is-active]="i18n.locale === 'fr'"
+          [attr.aria-pressed]="i18n.locale === 'fr'" aria-label="Français" (click)="setLang('fr')">FR</button>
+        <button type="button" class="bf-seg__btn" [class.is-active]="i18n.locale === 'ar'"
+          [attr.aria-pressed]="i18n.locale === 'ar'" aria-label="العربية" (click)="setLang('ar')">AR</button>
+        <span class="bf-seg__pill" aria-hidden="true"></span>
+      </div>
+
+      <button class="bf-theme" type="button" (click)="theme.toggle()" [attr.aria-pressed]="theme.current === 'dark'"
+        [attr.aria-label]="theme.current === 'dark' ? i18n.tr('Passer en mode clair', 'الوضع الفاتح') : i18n.tr('Passer en mode sombre', 'الوضع الداكن')">
+        <span class="bf-theme__track" aria-hidden="true">
+          <span class="bf-theme__thumb">
+            <svg class="bf-theme__icon bf-theme__icon--sun" width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="2" />
+              <path d="M12 2v2M12 20v2M22 12h-2M4 12H2M19.07 4.93l-1.41 1.41M6.34 17.66l-1.41 1.41M19.07 19.07l-1.41-1.41M6.34 6.34L4.93 4.93"
+                stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+            </svg>
+            <svg class="bf-theme__icon bf-theme__icon--moon" width="12" height="12" viewBox="0 0 24 24" fill="none">
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </span>
+        </span>
+        <span class="bf-theme__label">{{ theme.current === 'dark' ? 'Dark' : 'Light' }}</span>
+      </button>
+
+      <button *ngIf="signedIn" class="bf-btn--ghost" type="button" (click)="signOut()"
+        [attr.title]="auth.email" [attr.aria-label]="i18n.tr('Se déconnecter', 'تسجيل الخروج')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9" stroke="currentColor"
+            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+        <span>{{ i18n.tr('Déconnexion', 'خروج') }}</span>
+      </button>
+    </div>
+  </div>
+</header>

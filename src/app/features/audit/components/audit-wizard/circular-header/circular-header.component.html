@@ -1,0 +1,92 @@
+<div class="bf-card bf-wizard__header bf-wizard__header--circular">
+  <div class="bf-card__body bf-wizard__header-body">
+    
+    <!-- Central Progress Circle -->
+    <div class="bf-wizard__orbit">
+      
+      <!-- Center Hub -->
+      <div class="bf-wizard__hub">
+        <div class="bf-wizard__hub-ring">
+          <svg class="bf-wizard__progress-ring" viewBox="0 0 120 120">
+            <circle 
+              class="bf-wizard__progress-ring-bg"
+              cx="60" cy="60" r="54"
+              fill="none"
+              stroke-width="8"/>
+            <circle 
+              class="bf-wizard__progress-ring-fill"
+              cx="60" cy="60" r="54"
+              fill="none"
+              stroke-width="8"
+              [style.stroke-dasharray]="CIRCLE_CIRCUMFERENCE"
+              [style.stroke-dashoffset]="strokeDashoffset"/>
+          </svg>
+          
+          <div class="bf-wizard__hub-content">
+            <div class="bf-wizard__percent">{{ data.progressPercent }}%</div>
+            <div class="bf-wizard__step-count">
+              {{ data.stepIndex + 1 }}/{{ data.totalSteps }}
+            </div>
+          </div>
+        </div>
+
+        <!-- Current Section Title -->
+        <div class="bf-wizard__current-title">
+          <div class="bf-wizard__pulse-dot"></div>
+          <h2>{{ data.currentSection.title[data.locale] }}</h2>
+        </div>
+      </div>
+
+      <!-- Orbital Steps -->
+      <div class="bf-wizard__orbital-steps">
+        <button
+          *ngFor="let section of data.sections; let i = index; trackBy: trackBySection"
+          type="button"
+          class="bf-wizard__orbital-step"
+          [class.bf-wizard__orbital-step--active]="i === data.stepIndex"
+          [class.bf-wizard__orbital-step--done]="isStepCompleted(i)"
+          [class.bf-wizard__orbital-step--locked]="!canGoTo(i)"
+          [disabled]="!canGoTo(i)"
+          (click)="stepClick.emit(i)"
+          [style.--step-index]="i"
+          [style.--total-steps]="data.totalSteps"
+          [attr.aria-label]="section.title[data.locale]">
+          
+          <!-- Step Node -->
+          <span class="bf-wizard__node">
+            <span class="bf-wizard__node-inner">
+              <svg *ngIf="isStepCompleted(i)" width="12" height="12" viewBox="0 0 24 24" fill="none">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="3" stroke-linecap="round"/>
+              </svg>
+              <span *ngIf="!isStepCompleted(i)">{{ i + 1 }}</span>
+            </span>
+          </span>
+
+          <!-- Step Label (on hover) -->
+          <span class="bf-wizard__node-label">
+            {{ section.title[data.locale] }}
+          </span>
+        </button>
+      </div>
+    </div>
+    <br>
+    <!-- Bottom Quick Stats -->
+    <div class="bf-wizard__stats">
+      <div class="bf-wizard__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          <path d="M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11" stroke="currentColor" stroke-width="2"/>
+        </svg>
+        <span>{{ data.stepIndex }} {{ data.locale === 'ar' ? 'مكتملة' : 'complétées' }}</span>
+      </div>
+      <div class="bf-wizard__stat">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2"/>
+          <path d="M12 6v6l4 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>~{{ (data.totalSteps - data.stepIndex) * 3 }} min restantes</span>
+      </div>
+    </div>
+
+  </div>
+</div>

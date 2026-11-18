@@ -1,0 +1,380 @@
+/* ========================================
+   FIELD RENDERER — Universal Input System
+   Style: Architectural Premium
+   ======================================== */
+
+:host {
+    display: block;
+    /* On s'assure que le host prend toute la place dans la grille */
+    width: 100%;
+}
+
+/* ============ 1. DIVIDER (Section Separator) ============ */
+.bf-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--bf-4);
+    padding: var(--bf-4) 0;
+    margin: var(--bf-2) 0;
+}
+
+.bf-divider__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--bf-border-strong), transparent);
+    opacity: 0.5;
+}
+
+.bf-divider__label {
+    padding: 6px 16px;
+    font-family: var(--bf-font-mono);
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bf-text-secondary);
+
+    background: var(--bf-surface-active);
+    border: 1px solid var(--bf-border);
+    border-radius: 99px;
+    box-shadow: var(--bf-shadow-sm);
+}
+
+/* ============ 2. FIELD CONTAINER ============ */
+.bf-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    /* Entrée subtile */
+    animation: fieldFadeIn 0.4s ease-out backwards;
+}
+
+@keyframes fieldFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Header (Label + Status) */
+.bf-field__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.bf-field__label {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--bf-text-medium);
+    cursor: pointer;
+    transition: color 0.2s;
+
+    /* Focus sur l'input éclaire le label */
+    .bf-field:focus-within & {
+        color: var(--bf-text);
+    }
+}
+
+.bf-field__required {
+    color: var(--bf-red);
+    margin-inline-start: 4px;
+}
+
+.bf-field__status {
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    color: var(--bf-red);
+    background: color-mix(in srgb, var(--bf-red) 10%, transparent);
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+/* Helper Text */
+.bf-field__helper {
+    font-size: 12px;
+    color: var(--bf-muted);
+    margin-top: -4px;
+    margin-bottom: 4px;
+    line-height: 1.4;
+}
+
+/* ============ 3. INPUTS & TEXTAREAS ============ */
+.bf-control {
+    position: relative;
+    /* Icone de validation ou autre pourrait aller ici */
+}
+
+.bf-input,
+.bf-textarea,
+.bf-select {
+    width: 100%;
+    background: var(--bf-input-bg);
+    border: 1px solid var(--bf-input-border);
+    border-radius: var(--bf-r-md);
+    padding: 12px 16px;
+
+    font-family: var(--bf-font);
+    font-size: 15px;
+    /* Taille lisible */
+    color: var(--bf-text);
+
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &::placeholder {
+        color: var(--bf-input-placeholder);
+        opacity: 1;
+    }
+
+    /* Hover */
+    &:hover:not(:disabled) {
+        border-color: var(--bf-input-border-hover);
+        background: var(--bf-input-bg-hover);
+    }
+
+    /* Focus (Le Glow) */
+    &:focus {
+        background: var(--bf-bg-elevated);
+        border-color: var(--bf-red);
+        box-shadow: 0 0 0 4px var(--bf-input-focus-ring);
+        outline: none;
+        transform: translateY(-1px);
+    }
+
+    /* Invalid State */
+    &[aria-invalid="true"] {
+        border-color: var(--bf-bad);
+
+        &:focus {
+            box-shadow: 0 0 0 4px color-mix(in srgb, var(--bf-bad) 20%, transparent);
+        }
+    }
+
+    &:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+        background: var(--bf-surface-active);
+    }
+}
+
+.bf-textarea {
+    min-height: 100px;
+    resize: vertical;
+    line-height: 1.6;
+}
+
+.bf-select {
+    appearance: none;
+    cursor: pointer;
+    /* Fleche custom (SVG encode) */
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23888' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    background-size: 16px;
+}
+
+:host-context([dir="rtl"]) .bf-select {
+    background-position: left 16px center;
+}
+
+/* ============ 4. TOGGLE SWITCH (Animated Pill) ============ */
+.bf-toggle-control {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: var(--bf-surface);
+    padding: 4px;
+    border-radius: var(--bf-r-full);
+    /* Pill shape */
+    border: 1px solid var(--bf-border);
+    cursor: pointer;
+}
+
+.bf-toggle__pill {
+    position: absolute;
+    top: 4px;
+    bottom: 4px;
+    left: 4px;
+    width: calc(50% - 4px);
+    background: var(--bf-red);
+    border-radius: var(--bf-r-full);
+    box-shadow: 0 2px 8px rgba(196, 22, 28, 0.4);
+    pointer-events: none;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 0;
+}
+
+/* Gestion de la position via JS [style.transform], ou CSS simple : */
+/* Exemple : si active=false (NON), transform X. Le JS gère déjà ça super bien. */
+
+.bf-toggle__btn {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px;
+    border: none;
+    background: transparent;
+    border-radius: var(--bf-r-full);
+
+    font-weight: 700;
+    font-size: 13px;
+    color: var(--bf-text-secondary);
+    transition: color 0.2s;
+
+    &:hover {
+        color: var(--bf-text);
+    }
+
+    &--active {
+        color: #fff;
+        /* Toujours blanc sur rouge */
+    }
+}
+
+/* ============ 5. CHOICE CHIPS ============ */
+.bf-choice-control {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.bf-choice__chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: var(--bf-r-full);
+
+    background: var(--bf-surface);
+    border: 1px solid var(--bf-border);
+    color: var(--bf-text);
+    font-size: 14px;
+    font-weight: 500;
+
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.2, 0.8, 0.2, 1);
+
+    &:hover {
+        background: var(--bf-surface-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--bf-shadow-sm);
+    }
+
+    &--active {
+        background: color-mix(in srgb, var(--bf-red) 10%, transparent);
+        border-color: var(--bf-red);
+        color: var(--bf-red);
+        font-weight: 700;
+        box-shadow: none;
+        transform: translateY(0);
+    }
+}
+
+.bf-choice__dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 1px solid currentColor;
+
+    .bf-choice__chip--active & {
+        background: currentColor;
+    }
+}
+
+/* ============ 6. ERROR MESSAGE ============ */
+.bf-field__error {
+    margin-top: 6px;
+    padding: 8px 12px;
+    background: var(--bf-danger-bg);
+    color: var(--bf-danger-text);
+    font-size: 12px;
+    border-radius: var(--bf-r-sm);
+    border-left: 3px solid var(--bf-bad);
+
+    display: flex;
+    align-items: center;
+    animation: slideDownFade 0.3s ease-out;
+}
+
+:host-context([dir="rtl"]) .bf-field__error {
+    border-left: none;
+    border-right: 3px solid var(--bf-bad);
+}
+
+@keyframes slideDownFade {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ 7. HINTS & EXTRAS ============ */
+.bf-field__hint {
+    font-size: 12px;
+    color: var(--bf-warn-dark);
+    margin-top: 6px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    &::before {
+        content: "ℹ";
+        font-family: monospace;
+    }
+}/* ============ 1. DIVIDER (Section Separator) ============ */
+.bf-divider {
+    display: flex;
+    align-items: center;
+    gap: var(--bf-4);
+    
+    /* Plus d'espace vertical pour éviter l'effet "collé" */
+    margin-top: var(--bf-6);    /* Était var(--bf-2) */
+    margin-bottom: var(--bf-4); /* Était var(--bf-2) */
+    
+    width: 100%;
+}
+
+.bf-divider__line {
+    flex: 1;
+    height: 1px;
+    /* Ligne plus subtile pour l'élégance */
+    background: linear-gradient(
+        90deg, 
+        transparent 0%, 
+        var(--bf-border-strong) 20%, 
+        var(--bf-border-strong) 80%, 
+        transparent 100%
+    );
+    opacity: 0.3; /* Moins agressif */
+}
+
+.bf-divider__label {
+    flex-shrink: 0;
+    padding: 4px 12px;
+    
+    font-family: var(--bf-font-mono);
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bf-muted); /* Couleur plus douce */
+    
+    /* Fond transparent ou très léger pour l'intégration */
+    background: var(--bf-surface); 
+    border: 1px solid var(--bf-border);
+    border-radius: 99px;
+}

@@ -1,0 +1,60 @@
+<!-- ========================================
+     AUDIT STEP — Section Card Premium
+     ======================================== -->
+<section class="bf-step" [attr.dir]="i18n.dir" role="region" [attr.aria-labelledby]="'step-title-' + section.id">
+
+    <div class="bf-card bf-step__card">
+
+        <!-- ============ HEADER ============ -->
+        <div class="bf-card__head bf-step__head">
+
+
+
+            <!-- Header Content -->
+            <div class="bf-step__head-content">
+
+                <!-- Section Badge -->
+                <div class="bf-step__badge" aria-hidden="true">
+                    <span class="bf-step__badge-dot"></span>
+                    <span class="bf-step__badge-text">
+                        {{ i18n.locale === 'ar' ? 'قسم التدقيق' : 'Section Audit' }}
+                    </span>
+                </div>
+
+                <!-- Section Title -->
+                <h2 class="bf-card__title bf-step__title" [id]="'step-title-' + section.id">
+                    {{ section.title[i18n.locale] }}
+                </h2>
+
+                <!-- Optional Description -->
+                <p class="bf-card__desc bf-step__desc" *ngIf="section.description">
+                    {{ section.description[i18n.locale] }}
+                </p>
+
+            </div>
+
+            <!-- Decorative Corner Glow -->
+            <div class="bf-step__corner-glow" aria-hidden="true"></div>
+
+        </div>
+
+        <!-- ============ BODY ============ -->
+        <div class="bf-card__body bf-step__body" [formGroup]="form">
+
+            <!-- Fields Grid -->
+            <div class="bf-step__grid">
+                <div class="bf-step__cell" *ngFor="let field of section.fields; let i = index; trackBy: trackByField"
+                    [class.bf-step__cell--full]="isFullWidth(field)"
+                    [class.bf-step__cell--divider]="field.type === 'divider'" [style.animation-delay.ms]="i * 40">
+
+                    <!-- Field Renderer -->
+                    <app-field-renderer [field]="field" [form]="form" [allFields]="allFields">
+                    </app-field-renderer>
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>

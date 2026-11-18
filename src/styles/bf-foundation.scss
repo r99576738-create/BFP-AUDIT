@@ -1,0 +1,163 @@
+/* ========================================
+   BUILDING FIT — FOUNDATION
+   Base styles, resets, accessibility
+   ======================================== */
+
+/* Box Model Reset */
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+/* Root & Body */
+html {
+    height: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    font-family: var(--bf-font);
+    font-size: 16px;
+    line-height: 1.6;
+    background: var(--bf-bg);
+    color: var(--bf-text);
+    overflow-x: hidden;
+    transition: background-color var(--bf-med) var(--bf-ease),
+                color var(--bf-med) var(--bf-ease);
+}
+
+/* RTL Support */
+html[dir="rtl"] body {
+    direction: rtl;
+}
+
+html[dir="rtl"] .bf-row,
+html[dir="rtl"] .bf-flex {
+    flex-direction: row-reverse;
+}
+
+html[dir="rtl"] .bf-field__label,
+html[dir="rtl"] .bf-card__title {
+    text-align: right;
+}
+
+html[dir="rtl"] .bf-actions {
+    flex-direction: row-reverse;
+}
+
+/* Focus Styles — Accessibility */
+:focus {
+    outline: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--bf-focus);
+    outline-offset: 3px;
+    border-radius: 4px;
+    transition: outline var(--bf-fast) var(--bf-ease);
+}
+
+/* Disabled State — Global */
+:disabled,
+[aria-disabled="true"] {
+    cursor: not-allowed;
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+/* Selection */
+::selection {
+    background: var(--bf-accent-bg);
+    color: var(--bf-text);
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--bf-surface);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--bf-border);
+    border-radius: 4px;
+    transition: background var(--bf-fast) var(--bf-ease);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--bf-muted);
+}
+
+/* Typography Defaults */
+h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: var(--bf-font-display);
+    font-weight: 600;
+    line-height: 1.3;
+    letter-spacing: 0.02em;
+}
+
+p {
+    margin: 0 0 1em;
+}
+
+/* Links */
+a {
+    color: var(--bf-red);
+    text-decoration: none;
+    transition: color var(--bf-fast) var(--bf-ease);
+}
+
+a:hover {
+    color: var(--bf-red-2);
+}
+
+/* Remove default input styles */
+input,
+textarea,
+select,
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+}
+
+/* Button Reset */
+button {
+    border: none;
+    background: none;
+    padding: 0;
+    cursor: pointer;
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* Screen Reader Only */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}

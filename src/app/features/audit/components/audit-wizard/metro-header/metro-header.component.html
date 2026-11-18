@@ -1,0 +1,66 @@
+<div class="bf-card bf-wizard__header bf-wizard__header--digital">
+  <div class="bf-card__body">
+
+    <!-- Top Row: Info & Stats -->
+    <div class="bf-digital__info">
+      <div class="bf-digital__badge">
+        <span class="bf-digital__badge-dot"></span>
+        PHASE {{ data.stepIndex + 1 }}
+      </div>
+      
+      <div class="bf-digital__title-group">
+        <h2 class="bf-digital__title">{{ data.currentSection.title[data.locale] }}</h2>
+        <span class="bf-digital__subtitle">
+          {{ data.stepIndex }} / {{ data.totalSteps }} {{ data.locale === 'ar' ? 'مكتمل' : 'Completed' }}
+        </span>
+      </div>
+    </div>
+
+    <!-- The Digital Track -->
+    <div class="bf-digital__track-container">
+      <div class="bf-digital__track">
+        
+        <!-- Base Line -->
+        <div class="bf-digital__line-base"></div>
+        
+        <!-- Active Progress Line -->
+        <div 
+          class="bf-digital__line-fill"
+          [style.width.%]="trainPathWidth">
+          <div class="bf-digital__line-glow"></div>
+        </div>
+
+        <!-- Steps (Nodes) -->
+        <button
+          *ngFor="let section of data.sections; let i = index; trackBy: trackBySection"
+          type="button"
+          class="bf-digital__node"
+          [class.is-active]="i === data.stepIndex"
+          [class.is-done]="isStepCompleted(i)"
+          [class.is-locked]="!canGoTo(i)"
+          [disabled]="!canGoTo(i)"
+          (click)="stepClick.emit(i)"
+          [style.left.%]="getStationPosition(i)"
+          [attr.aria-label]="section.title[data.locale]">
+          
+          <!-- Node Shape (Diamond/Square) -->
+          <div class="bf-digital__shape">
+            <!-- Icon for Done -->
+            <svg *ngIf="isStepCompleted(i)" viewBox="0 0 24 24" fill="none" class="bf-digital__icon">
+              <path d="M20 6L9 17L4 12" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <!-- Number for Active/Locked -->
+            <span *ngIf="!isStepCompleted(i)" class="bf-digital__number">{{ i + 1 }}</span>
+          </div>
+
+          <!-- Label (Always visible for active, hover for others) -->
+          <span class="bf-digital__label">
+            {{ section.title[data.locale] }}
+          </span>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</div>

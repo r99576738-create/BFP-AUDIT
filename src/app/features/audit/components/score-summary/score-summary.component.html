@@ -1,0 +1,68 @@
+<section class="bf-card bf-score" [ngClass]="'bf-score--' + score.grade.toLowerCase()" [attr.dir]="i18n.dir"
+  [attr.aria-label]="i18n.tr('Note de l’audit', 'نتيجة التدقيق')">
+  <div class="bf-card__body bf-score__body">
+
+    <div class="bf-score__hero">
+      <div class="bf-score__ring" role="img"
+        [attr.aria-label]="score.score + ' / 100'">
+        <svg viewBox="0 0 120 120" aria-hidden="true">
+          <circle class="bf-score__track" cx="60" cy="60" [attr.r]="ringRadius" />
+          <circle class="bf-score__fill" cx="60" cy="60" [attr.r]="ringRadius"
+            [attr.stroke-dasharray]="ringCircumference" [attr.stroke-dashoffset]="ringOffset" />
+        </svg>
+        <div class="bf-score__value">
+          <strong>{{ score.score | number:'1.0-1' }}</strong>
+          <span>/100</span>
+        </div>
+      </div>
+
+      <div class="bf-score__verdict">
+        <div class="bf-score__grade-row">
+          <span class="bf-grade bf-grade--lg" [ngClass]="'bf-grade--' + score.grade.toLowerCase()">{{ score.grade }}</span>
+          <div>
+            <p class="bf-score__grade-label">{{ gradeLabel(score.grade) }}</p>
+            <p class="bf-score__grade-sub">
+              {{ score.answeredScorable }} / {{ score.totalScorable }} {{ i18n.tr('critères notés renseignés', 'معيارًا مُقيَّمًا مُعبّأ') }}
+            </p>
+          </div>
+        </div>
+        <p class="bf-score__cap" *ngIf="score.capped">
+          {{ i18n.tr(
+            'Lettre plafonnée à ' + score.grade + ' (au lieu de ' + score.rawGrade + ') à cause de ' + score.criticalFailures.length + (score.criticalFailures.length > 1 ? ' points critiques.' : ' point critique.'),
+            'الدرجة محدودة بـ ' + score.grade + ' (بدل ' + score.rawGrade + ') بسبب ' + score.criticalFailures.length + ' نقاط حرجة.') }}
+        </p>
+      </div>
+    </div>
+
+    <ul class="bf-score__sections">
+      <li *ngFor="let s of score.sections" class="bf-score__section">
+        <div class="bf-score__section-head">
+          <span class="bf-score__section-title">{{ sectionTitle(s) }}</span>
+          <span class="bf-score__section-pct" [ngClass]="'bf-score__section-pct--' + sectionGrade(s)">{{ s.percent | number:'1.0-0' }} %</span>
+        </div>
+        <div class="bf-score__bar" role="progressbar" [attr.aria-valuenow]="s.percent" aria-valuemin="0" aria-valuemax="100"
+          [attr.aria-label]="sectionTitle(s)">
+          <span class="bf-score__bar-fill" [ngClass]="'bf-score__bar-fill--' + sectionGrade(s)" [style.width.%]="s.percent"></span>
+        </div>
+        <span class="bf-score__section-meta">
+          {{ i18n.tr('poids', 'الوزن') }} {{ s.weight }} · {{ s.earned }}/{{ s.max }} {{ i18n.tr('pts', 'ن') }}
+        </span>
+      </li>
+    </ul>
+
+    <div class="bf-score__critical" *ngIf="score.criticalFailures.length" role="note">
+      <div class="bf-score__critical-head">
+        <span class="bf-score__critical-icon" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+            <path d="M12 9v4M12 17h.01M10.29 3.86 1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"
+              stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </span>
+        <strong>{{ i18n.tr('Points critiques', 'نقاط حرجة') }}</strong>
+      </div>
+      <ul>
+        <li *ngFor="let key of score.criticalFailures">{{ criticalLabel(key) }}</li>
+      </ul>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,34 @@
+<main class="bf-login" [attr.dir]="i18n.dir">
+  <form class="bf-card bf-login__card" [formGroup]="form" (ngSubmit)="submit()" novalidate>
+    <div class="bf-card__body">
+      <span class="bf-login__badge">{{ i18n.tr('Espace auditeurs', 'فضاء المدققين') }}</span>
+      <h1 class="bf-login__title">{{ i18n.tr('Connexion', 'تسجيل الدخول') }}</h1>
+      <p class="bf-login__sub">
+        {{ i18n.tr('Connectez-vous pour remplir et consulter les audits.', 'سجّل الدخول لملء التدقيقات والاطلاع عليها.') }}
+      </p>
+
+      <div class="bf-field">
+        <label class="bf-field__label" for="login-email">{{ i18n.tr('Email', 'البريد الإلكتروني') }}</label>
+        <input id="login-email" class="bf-input" type="email" autocomplete="username" inputmode="email"
+          formControlName="email" [class.bf-input--invalid]="form.controls.email.touched && form.controls.email.invalid" />
+      </div>
+
+      <div class="bf-field">
+        <label class="bf-field__label" for="login-password">{{ i18n.tr('Mot de passe', 'كلمة المرور') }}</label>
+        <input id="login-password" class="bf-input" type="password" autocomplete="current-password"
+          formControlName="password"
+          [class.bf-input--invalid]="form.controls.password.touched && form.controls.password.invalid" />
+      </div>
+
+      <p *ngIf="error" class="bf-login__error" role="alert">{{ error }}</p>
+
+      <button class="bf-btn bf-btn--primary bf-login__submit" type="submit" [disabled]="loading">
+        {{ loading ? i18n.tr('Connexion…', 'جارٍ الدخول…') : i18n.tr('Se connecter', 'دخول') }}
+      </button>
+
+      <p class="bf-login__note">
+        {{ i18n.tr('Pas de compte ? Demandez à l’administrateur de vous en créer un.', 'ليس لديك حساب؟ اطلب من المسؤول إنشاءه.') }}
+      </p>
+    </div>
+  </form>
+</main>

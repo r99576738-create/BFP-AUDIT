@@ -1,0 +1,441 @@
+/* ========================================
+   AUDIT STEP — Premium Component (Clean)
+   ======================================== */
+
+:host {
+    display: block;
+    margin-bottom: var(--bf-8);
+    contain: content;
+
+    /* --- Local Tokens --- */
+    --step-bg: var(--bf-bg-elevated);
+    --step-border: var(--bf-border-subtle);
+    --step-border-hover: var(--bf-border-strong);
+
+    /* Cellules */
+    --step-cell-bg: var(--bf-panel);
+    --step-cell-border: var(--bf-panel-border);
+    --step-cell-hover: var(--bf-surface-hover);
+
+    /* Typo & Effets */
+    --step-font-title: var(--bf-font-display, sans-serif);
+    --step-glow: var(--bf-corner-glow);
+}
+
+/* ============ 1. STEP CONTAINER ============ */
+.bf-step {
+    animation: stepSlideUp 0.6s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
+@keyframes stepSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ============ 2. CARD SHELL ============ */
+.bf-step__card {
+    position: relative;
+    background: var(--step-bg);
+    border: 1px solid var(--step-border);
+    border-radius: var(--bf-r-xl);
+    box-shadow: var(--bf-shadow-sm);
+
+    transition:
+        transform 0.3s ease,
+        box-shadow 0.3s ease,
+        border-color 0.3s ease;
+
+    /* IMPORTANT : Visible pour que les tooltips/selects ne soient pas coupés */
+    overflow: visible;
+
+    &:hover {
+        border-color: var(--step-border-hover);
+        box-shadow: var(--bf-shadow-md);
+        transform: translateY(-1px);
+    }
+}
+
+/* ============ 3. HEADER ZONE ============ */
+.bf-step__head {
+    position: relative;
+    padding: var(--bf-6);
+
+    border-bottom: 1px solid var(--bf-border-subtle);
+    border-radius: var(--bf-r-xl) var(--bf-r-xl) 0 0;
+    /* Radius seulement en haut */
+
+    /* Fond dégradé subtil */
+    background: linear-gradient(180deg,
+            var(--bf-surface-hover) 0%,
+            transparent 100%);
+
+    /* Masquer le débordement du glow SEULEMENT sur le header */
+    overflow: hidden;
+}
+
+/* --- Decorative Corner Glow --- */
+.bf-step__corner-glow {
+    position: absolute;
+    top: -80px;
+    inset-inline-end: -80px;
+    /* Support RTL auto */
+    width: 240px;
+    height: 240px;
+    background: radial-gradient(closest-side, var(--step-glow), transparent);
+    opacity: 0.5;
+    filter: blur(50px);
+    pointer-events: none;
+    z-index: 0;
+}
+
+/* --- Header Content --- */
+.bf-step__head-content {
+    position: relative;
+    z-index: 1;
+}
+
+.bf-step__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bf-2);
+    padding: 4px var(--bf-3);
+    margin-bottom: var(--bf-4);
+
+    background: var(--bf-badge-bg);
+    border: 1px solid var(--bf-badge-border);
+    border-radius: var(--bf-r-full);
+
+    font-family: var(--bf-font-mono);
+    font-size: 11px;
+    font-weight: var(--bf-font-bold);
+    color: var(--bf-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.bf-step__badge-dot {
+    width: 6px;
+    height: 6px;
+    background: var(--bf-red);
+    border-radius: 50%;
+    box-shadow: 0 0 6px var(--bf-red);
+}
+
+.bf-step__title {
+    margin: 0;
+    font-family: var(--step-font-title);
+    font-size: var(--bf-text-3xl);
+    /* Titre plus grand car il n'y a plus d'icône */
+    font-weight: 800;
+    color: var(--bf-text);
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.bf-step__desc {
+    margin-top: var(--bf-3);
+    margin-bottom: 0;
+    font-size: var(--bf-text-base);
+    line-height: var(--bf-leading-relaxed);
+    color: var(--bf-muted);
+    max-width: 70ch;
+}
+
+/* ============ 4. BODY & GRID ============ */
+.bf-step__body {
+    position: relative;
+    padding: var(--bf-6);
+    background: transparent;
+    /* Pas de grille */
+
+    @media (max-width: 640px) {
+        padding: var(--bf-4);
+    }
+}
+
+.bf-step__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--bf-4);
+    position: relative;
+    z-index: 1;
+}
+
+/* ============ 5. CELLULES / CHAMPS ============ */
+.bf-step__cell {
+    position: relative;
+    padding: var(--bf-4);
+
+    background: var(--step-cell-bg);
+    border: 1px solid var(--step-cell-border);
+    border-radius: var(--bf-r-md);
+
+    /* Layout pour renderer */
+    display: flex;
+    flex-direction: column;
+    overflow: visible;
+
+    transition:
+        background 0.2s ease,
+        border-color 0.2s ease,
+        transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+        box-shadow 0.3s ease;
+
+    animation: cellIn 0.5s cubic-bezier(0.2, 0.8, 0.2, 1) backwards;
+
+    /* --- Hover Effects --- */
+    &:hover:not(.bf-step__cell--divider) {
+        background: var(--step-cell-hover);
+        border-color: var(--step-border-hover);
+        transform: translateY(-3px);
+        box-shadow: var(--bf-shadow-md);
+        z-index: 10;
+
+        &::before {
+            transform: scaleY(1);
+            opacity: 1;
+        }
+    }
+
+    &:focus-within {
+        background: var(--step-bg);
+        border-color: var(--bf-focus);
+        box-shadow: 0 0 0 3px var(--bf-focus-ring);
+        z-index: 10;
+    }
+
+    /* Barre rouge latérale */
+    &::before {
+        content: "";
+        position: absolute;
+        inset-inline-start: -1px;
+        top: 12px;
+        bottom: 12px;
+        width: 3px;
+        background: var(--bf-red);
+        border-radius: 0 var(--bf-r-xs) var(--bf-r-xs) 0;
+        opacity: 0;
+        transform: scaleY(0.3);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+        pointer-events: none;
+    }
+}
+
+:host-context([dir="rtl"]) .bf-step__cell::before {
+    border-radius: var(--bf-r-xs) 0 0 var(--bf-r-xs);
+}
+
+@keyframes cellIn {
+    from {
+        opacity: 0;
+        transform: translateY(12px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* ============ 6. MODIFIERS ============ */
+.bf-step__cell--full {
+    grid-column: 1 / -1;
+}
+
+.bf-step__cell--divider {
+    grid-column: 1 / -1;
+    height: auto;
+    /* Laisse le contenu décider (le renderer gère les marges) */
+    padding: 0;
+    background: transparent;
+    border: none;
+    box-shadow: none !important;
+    transform: none !important;
+    pointer-events: none;
+
+    &::before {
+        display: none;
+    }
+}
+/* ============ 3. HEADER ZONE (Creative Redesign) ============ */
+.bf-step__head {
+    position: relative;
+    padding: var(--bf-8) var(--bf-6) var(--bf-6); /* Plus d'espace en haut */
+    
+    /* Forme et Bordure */
+    border-bottom: 1px solid transparent;
+    border-radius: var(--bf-r-xl) var(--bf-r-xl) 0 0;
+    
+    /* FOND CRÉATIF : Texture "Papier technique" + Lumière */
+    background: 
+        /* 1. Texture de points subtile */
+        radial-gradient(var(--bf-border-strong) 1px, transparent 1px),
+        /* 2. Fond de base dégradé */
+        linear-gradient(180deg, var(--bf-surface-hover) 0%, var(--step-bg) 100%);
+        
+    background-size: 20px 20px, 100% 100%;
+    
+    /* Masquer le glow qui dépasse */
+    overflow: hidden;
+    
+    /* Ligne décorative animée en bas */
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: linear-gradient(
+            90deg, 
+            transparent 0%, 
+            var(--bf-border-strong) 20%, 
+            var(--bf-border-strong) 80%, 
+            transparent 100%
+        );
+    }
+}
+
+/* --- The "Spotlight" (Corner Glow Redesigned) --- */
+.bf-step__corner-glow {
+    position: absolute;
+    top: -100px;
+    /* RTL Support auto */
+    inset-inline-end: -50px; 
+    
+    width: 300px; 
+    height: 300px;
+    
+    /* Dégradé complexe pour un effet "Néon diffus" */
+    background: conic-gradient(
+        from 180deg at 50% 50%,
+        transparent 0deg,
+        var(--bf-accent-bg) 140deg,
+        var(--step-glow) 180deg,
+        transparent 240deg
+    );
+    
+    opacity: 0.6;
+    filter: blur(60px);
+    mix-blend-mode: screen; /* Fusionne avec le fond pour un effet lumineux */
+    pointer-events: none;
+    
+    /* Rotation très lente pour donner de la vie */
+    animation: auroraRotate 20s linear infinite;
+}
+
+@keyframes auroraRotate {
+    0% { transform: rotate(0deg) scale(1); }
+    50% { transform: rotate(10deg) scale(1.1); }
+    100% { transform: rotate(0deg) scale(1); }
+}
+
+/* --- Header Content --- */
+.bf-step__head-content {
+    position: relative;
+    z-index: 2; /* Au-dessus de la texture */
+}
+
+/* --- Badge "Tech Chip" --- */
+.bf-step__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 12px;
+    margin-bottom: var(--bf-4);
+    
+    /* Look "Verre givré" */
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(8px);
+    border: 1px solid var(--bf-border);
+    border-radius: 8px; /* Squircle */
+    
+    box-shadow: 0 2px 10px rgba(0,0,0,0.03);
+    
+    transition: transform 0.3s ease;
+}
+
+.bf-step__card:hover .bf-step__badge {
+    transform: translateX(4px); /* Petit mouvement au survol de la carte */
+    border-color: var(--bf-border-strong);
+}
+
+.bf-step__badge-text {
+    font-family: var(--bf-font-mono);
+    font-size: 10px;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--bf-text-secondary);
+}
+
+.bf-step__badge-dot {
+    position: relative;
+    width: 6px; height: 6px;
+    background: var(--bf-red);
+    border-radius: 50%;
+    
+    /* Effet "Live" pulsant */
+    &::after {
+        content: "";
+        position: absolute;
+        inset: -4px;
+        border-radius: 50%;
+        border: 1px solid var(--bf-red);
+        opacity: 0;
+        animation: ping 2s cubic-bezier(0, 0, 0.2, 1) infinite;
+    }
+}
+
+@keyframes ping {
+    75%, 100% { transform: scale(2); opacity: 0; }
+}
+
+/* --- Title "Editorial" --- */
+.bf-step__title {
+    margin: 0;
+    font-family: var(--step-font-title);
+    font-size: 32px; /* Grand et assumé */
+    font-weight: 800;
+    line-height: 1.1;
+    letter-spacing: -0.03em;
+    
+    /* Gradient Text Fill (Effet Métallique/Premium) */
+    background: linear-gradient(
+        135deg, 
+        var(--bf-text) 0%, 
+        var(--bf-text-secondary) 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    
+    /* Petite ombre portée douce */
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.05));
+}
+
+/* --- Description --- */
+.bf-step__desc {
+    margin-top: var(--bf-3);
+    padding-left: var(--bf-1);
+    border-left: 2px solid var(--bf-red); /* Accent vertical */
+    padding-inline-start: 12px; /* Espace logique */
+    
+    font-size: 15px;
+    line-height: 1.6;
+    color: var(--bf-muted);
+    max-width: 600px;
+}
+
+/* RTL Support pour la barre latérale de description */
+:host-context([dir="rtl"]) .bf-step__desc {
+    border-left: none;
+    border-right: 2px solid var(--bf-red);
+}

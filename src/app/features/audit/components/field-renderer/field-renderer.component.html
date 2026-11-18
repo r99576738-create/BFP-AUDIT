@@ -1,0 +1,277 @@
+<!-- ========================================
+     FIELD RENDERER — Universal Input Router
+     ======================================== -->
+
+<!-- ============ DIVIDER ============ -->
+<ng-container *ngIf="isVisible(field)">
+
+  <!-- ============ DIVIDER ============ -->
+  <div
+    *ngIf="field.type === 'divider'"
+    class="bf-divider"
+    role="separator"
+    [attr.aria-label]="getLabel()"
+  >
+    <span class="bf-divider__line" aria-hidden="true"></span>
+
+    <span class="bf-divider__label" *ngIf="field.label">
+      {{ getLabel() }}
+    </span>
+
+    <span class="bf-divider__line" aria-hidden="true"></span>
+  </div>
+
+  <!-- ============ ALL INPUT FIELDS ============ -->
+  <div
+    *ngIf="field.type !== 'divider'"
+    class="bf-field"
+    [class.bf-field--invalid]="isInvalid()"
+    [class.bf-field--filled]="isFilled()"
+  >
+  <!-- ============ FIELD HEADER ============ -->
+  <div class="bf-field__header">
+    <label class="bf-field__label" [for]="getFieldId()">
+      {{ getLabel() }}
+      <span *ngIf="field.required" class="bf-field__required" aria-label="required">*</span>
+    </label>
+
+    <div class="bf-field__status" *ngIf="isInvalid()" role="status" aria-live="polite">
+      {{ i18n.locale === 'ar' ? 'مطلوب' : 'Requis' }}
+    </div>
+  </div>
+
+  <!-- ============ HELPER TEXT ============ -->
+  <p class="bf-field__helper" *ngIf="shouldShowHelper()" [id]="getHelperId()">
+    {{ getPlaceholder() }}
+  </p>
+
+  <!-- ============ CONTROL SWITCH ============ -->
+  <ng-container [ngSwitch]="field.type">
+
+    <!-- TEXT -->
+    <div *ngSwitchCase="'text'" class="bf-control">
+      <input
+        class="bf-input"
+        [id]="getFieldId()"
+        type="text"
+        [formControl]="getControl()"
+        [placeholder]="getPlaceholder()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+      />
+    </div>
+
+    <!-- TEL -->
+    <div *ngSwitchCase="'tel'" class="bf-control">
+      <input
+        class="bf-input"
+        [id]="getFieldId()"
+        type="tel"
+        inputmode="tel"
+        [formControl]="getControl()"
+        [placeholder]="getPlaceholder()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+      />
+    </div>
+
+    <!-- EMAIL -->
+    <div *ngSwitchCase="'email'" class="bf-control">
+      <input
+        class="bf-input"
+        [id]="getFieldId()"
+        type="email"
+        inputmode="email"
+        [formControl]="getControl()"
+        [placeholder]="getPlaceholder()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+      />
+    </div>
+
+    <!-- DATE -->
+    <div *ngSwitchCase="'date'" class="bf-control">
+      <input
+        class="bf-input"
+        [id]="getFieldId()"
+        type="date"
+        [formControl]="getControl()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+      />
+    </div>
+
+    <!-- NUMBER -->
+    <div *ngSwitchCase="'number'" class="bf-control">
+      <input
+        class="bf-input"
+        [id]="getFieldId()"
+        type="number"
+        inputmode="decimal"
+        [formControl]="getControl()"
+        [placeholder]="getPlaceholder()"
+        [attr.min]="numberMin"
+        [attr.max]="numberMax"
+        [attr.step]="numberStep"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+      />
+    </div>
+
+    <!-- TEXTAREA -->
+    <div *ngSwitchCase="'textarea'" class="bf-control">
+      <textarea
+        class="bf-textarea"
+        [id]="getFieldId()"
+        [formControl]="getControl()"
+        [rows]="textareaRows"
+        [placeholder]="getPlaceholder()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+      ></textarea>
+    </div>
+
+    <!-- GOVERNORATE SELECT -->
+    <div *ngSwitchCase="'governorate'" class="bf-control">
+      <select
+        class="bf-select"
+        [id]="getFieldId()"
+        [formControl]="getControl()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+        (change)="onGovernorateChange()"
+      >
+        <option [ngValue]="null">
+          {{ i18n.locale === 'ar' ? '-- اختر الولاية --' : '-- Choisir le gouvernorat --' }}
+        </option>
+
+        <option
+          *ngFor="let gov of governorates; trackBy: trackByGovernorateCode"
+          [ngValue]="gov.code"
+        >
+          {{ i18n.locale === 'ar' ? gov.nameAr : gov.name }}
+        </option>
+      </select>
+    </div>
+
+    <!-- CITY SELECT -->
+    <div *ngSwitchCase="'city'" class="bf-control">
+      <select
+        class="bf-select"
+        [id]="getFieldId()"
+        [formControl]="getControl()"
+        [attr.aria-invalid]="isInvalid()"
+        [attr.aria-describedby]="getAriaDescribedBy()"
+        [attr.aria-required]="field.required"
+        [disabled]="availableCities.length === 0"
+      >
+        <option [ngValue]="null">
+          {{ i18n.locale === 'ar' ? '-- اختر المدينة --' : '-- Choisir la ville --' }}
+        </option>
+
+        <option
+          *ngFor="let city of availableCities; trackBy: trackByCityName"
+          [ngValue]="city.name"
+        >
+          {{ i18n.locale === 'ar' ? city.nameAr : city.name }}
+        </option>
+      </select>
+
+      <p class="bf-field__hint" *ngIf="availableCities.length === 0">
+        {{ i18n.locale === 'ar' ? 'الرجاء اختيار ولاية أولاً' : 'Veuillez d\'abord choisir un gouvernorat' }}
+      </p>
+    </div>
+
+    <!-- TOGGLE (YES/NO) -->
+    <div
+      *ngSwitchCase="'toggle'"
+      class="bf-toggle-control"
+      role="radiogroup"
+      [attr.aria-label]="getLabel()"
+      [attr.aria-required]="field.required"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+    >
+      <button
+        type="button"
+        class="bf-toggle__btn"
+        [class.bf-toggle__btn--active]="getValue() === true"
+        (click)="setToggleValue(true)"
+        (keydown)="onToggleKeydown($event, true)"
+        role="radio"
+        [attr.aria-checked]="getValue() === true"
+        [attr.aria-label]="i18n.locale === 'ar' ? 'نعم' : 'Oui'"
+      >
+        <span class="bf-toggle__icon" aria-hidden="true">✓</span>
+        <span>{{ i18n.locale === 'ar' ? 'نعم' : 'Oui' }}</span>
+      </button>
+
+      <button
+        type="button"
+        class="bf-toggle__btn"
+        [class.bf-toggle__btn--active]="getValue() === false"
+        (click)="setToggleValue(false)"
+        (keydown)="onToggleKeydown($event, false)"
+        role="radio"
+        [attr.aria-checked]="getValue() === false"
+        [attr.aria-label]="i18n.locale === 'ar' ? 'لا' : 'Non'"
+      >
+        <span class="bf-toggle__icon" aria-hidden="true">✕</span>
+        <span>{{ i18n.locale === 'ar' ? 'لا' : 'Non' }}</span>
+      </button>
+
+      <!-- Animated pill indicator -->
+      <span
+        class="bf-toggle__pill"
+        aria-hidden="true"
+        [style.transform]="getTogglePillTransform()"
+        [style.opacity]="isTogglePillVisible() ? 1 : 0"
+      ></span>
+    </div>
+
+    <!-- CHOICE (RADIO CHIPS) -->
+    <div
+      *ngSwitchCase="'choice'"
+      class="bf-choice-control"
+      role="radiogroup"
+      [attr.aria-label]="getLabel()"
+      [attr.aria-required]="field.required"
+      [attr.aria-describedby]="getAriaDescribedBy()"
+    >
+      <button
+        type="button"
+        class="bf-choice__chip"
+        *ngFor="let option of choiceOptions; trackBy: trackByOptionValue"
+        [class.bf-choice__chip--active]="isChoiceSelected(option.value)"
+        (click)="setChoiceValue(option.value)"
+        (keydown)="onChoiceKeydown($event, option.value)"
+        role="radio"
+        [attr.aria-checked]="isChoiceSelected(option.value)"
+        [attr.aria-label]="getOptionLabel(option)"
+      >
+        <span class="bf-choice__dot" aria-hidden="true"></span>
+        <span class="bf-choice__text">{{ getOptionLabel(option) }}</span>
+      </button>
+    </div>
+
+    <!-- SIGNATURE -->
+    <app-ui-signature
+      *ngSwitchCase="'signature'"
+      [formControl]="getControl()"
+      [title]="getLabel()"
+      [required]="field.required || false"
+    ></app-ui-signature>
+
+  </ng-container>
+
+  <!-- ============ ERROR MESSAGE ============ -->
+  <div *ngIf="isInvalid()" class="bf-field__error" [id]="getErrorId()" role="alert" aria-live="assertive">
+    {{ getErrorText() }}
+  </div>
+</div>

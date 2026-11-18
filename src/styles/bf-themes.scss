@@ -1,0 +1,540 @@
+/* ========================================
+   BUILDING FIT — DESIGN TOKENS
+   CSS Variables for theming
+   ======================================== */
+
+:root {
+    /* ============ TYPOGRAPHY ============ */
+    --bf-font: Inter, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+    --bf-font-display: "Oswald", "Montserrat", Inter, sans-serif;
+    --bf-font-mono: "Fira Code", "JetBrains Mono", Consolas, monospace;
+
+    /* Font Sizes */
+    --bf-text-2xs: 0.6875rem;
+    /* 11px - AJOUTÉ */
+    --bf-text-xs: 0.75rem;
+    /* 12px */
+    --bf-text-sm: 0.875rem;
+    /* 14px */
+    --bf-text-base: 1rem;
+    /* 16px */
+    --bf-text-lg: 1.125rem;
+    /* 18px */
+    --bf-text-xl: 1.25rem;
+    /* 20px */
+    --bf-text-2xl: 1.5rem;
+    /* 24px */
+    --bf-text-3xl: 1.875rem;
+    /* 30px */
+    --bf-text-4xl: 2.25rem;
+    /* 36px - AJOUTÉ */
+
+    /* Line Heights */
+    --bf-leading-tight: 1.25;
+    --bf-leading-normal: 1.5;
+    --bf-leading-relaxed: 1.75;
+
+    /* Font Weights */
+    --bf-font-normal: 400;
+    --bf-font-medium: 500;
+    --bf-font-semibold: 600;
+    --bf-font-bold: 700;
+    --bf-font-black: 800;
+    /* AJOUTÉ */
+
+    /* ============ LAYOUT ============ */
+    /* Radius */
+    --bf-r-xs: 4px;
+    /* AJOUTÉ */
+    --bf-r-sm: 8px;
+    --bf-r-md: 12px;
+    --bf-r-lg: 16px;
+    --bf-r-xl: 20px;
+    --bf-r-2xl: 24px;
+    /* AJOUTÉ */
+    --bf-r-full: 9999px;
+
+    /* Spacing Scale */
+    --bf-0: 0;
+    --bf-1: 4px;
+    --bf-2: 8px;
+    --bf-3: 12px;
+    --bf-4: 16px;
+    --bf-5: 20px;
+    --bf-6: 24px;
+    --bf-7: 32px;
+    --bf-8: 40px;
+    --bf-9: 48px;
+    --bf-10: 64px;
+    --bf-12: 80px;
+
+    /* Container Max Width */
+    --bf-container-max: 1200px;
+    --bf-container-padding: var(--bf-4);
+
+    /* ============ MOTION ============ */
+    --bf-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+    --bf-ease-in: cubic-bezier(0.4, 0, 1, 1);
+    --bf-ease-out: cubic-bezier(0, 0, 0.2, 1);
+    --bf-ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+
+    --bf-fast: 140ms;
+    --bf-base: 200ms;
+    /* AJOUTÉ (alias pour med) */
+    --bf-med: 240ms;
+    --bf-slow: 360ms;
+
+    /* ============ BRAND COLORS ============ */
+    --bf-red: #c4161c;
+    --bf-red-bright: #ff2a2f;
+    --bf-red-dark: #a31217;
+    --bf-red-2: #ff2a2f;
+    /* Alias pour red-bright */
+    --bf-white: #ffffff;
+    --bf-black: #0a0a0a;
+
+    /* ============ SEMANTIC COLORS ============ */
+    --bf-ok: #19c37d;
+    --bf-ok-dark: #0f9b60;
+    --bf-warn: #f5c542;
+    --bf-warn-dark: #d4a520;
+    --bf-bad: #ff4d4f;
+    --bf-bad-dark: #c83032;
+    --bf-info: #3b82f6;
+
+    /* Success aliases (pour compatibilité wizard) */
+    --bf-success: var(--bf-ok);
+    --bf-success-dark: var(--bf-ok-dark);
+
+    /* ============ ARCHITECTURAL ============ */
+    --bf-arch-grid-size: 40px;
+    --bf-arch-diag-size: 80px;
+    --bf-arch-angle: 135deg;
+
+    /* ============ Z-INDEX SCALE ============ */
+    --bf-z-base: 1;
+    --bf-z-elevated: 10;
+    --bf-z-dropdown: 100;
+    --bf-z-sticky: 200;
+    --bf-z-modal: 300;
+    --bf-z-topbar: 400;
+    --bf-z-tooltip: 500;
+
+    /* ============ SHADOWS (Neutral Defaults) ============ */
+    --bf-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* AJOUTÉ */
+    --bf-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --bf-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --bf-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    --bf-shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.05);
+    --bf-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+    --bf-shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.10);
+    /* GLASSMORPHISM PRESETS */
+    --bf-glass-blur: 12px;
+    --bf-glass-saturation: 160%;
+    --bf-glass-border: rgba(255, 255, 255, 0.08);
+
+    /* PHYSICS ANIMATIONS (Springs) */
+    --bf-spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+    --bf-spring-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);
+        /* Physics */
+    --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1); /* Rebond élastique "Apple-like" */
+    --ease-smooth: cubic-bezier(0.2, 0.8, 0.2, 1);    /* Lissage cinématique */
+    
+    /* Architectural Textures */
+    --blueprint-grid: rgba(120, 120, 120, 0.08);      /* Grille technique subtile */
+    --glass-border:   rgba(255, 255, 255, 0.08);      /* Bordure verre */
+    --neon-glow:      var(--bf-red-bright, #ff2a2f);  /* Lumière néon */
+    
+    /* Mapping Local */
+    --step-bg:        var(--bf-bg-elevated);
+    --step-radius:    var(--bf-r-xl);
+       /* Physics: Rapide et Précis */
+    --tech-ease: cubic-bezier(0.16, 1, 0.3, 1); /* "Out Quart" - très premium */
+    
+    /* Surfaces */
+    --tech-surface: rgba(255, 255, 255, 0.6); /* Semi-transparent */
+    --tech-border:  rgba(0, 0, 0, 0.06);
+    
+    /* Glows */
+    --tech-accent-glow: 0 0 20px rgba(196, 22, 28, 0.15);
+}
+
+/* ========================================
+   DARK THEME
+   ======================================== */
+:root[data-theme="dark"] {
+    --bf-grade-a: #19c37d;
+    --bf-grade-b: #8ccf4d;
+    --bf-grade-c: #f5c542;
+    --bf-grade-d: #f2913d;
+    --bf-grade-e: #ff4d4f;
+
+    --bf-sign-ink: rgba(255, 255, 255, 0.95);
+
+    /* Base Surfaces */
+    --bf-bg: #0a0a0a;
+    --bf-bg-elevated: #121212;
+    --bf-surface: rgba(255, 255, 255, 0.04);
+    --bf-surface-hover: rgba(255, 255, 255, 0.06);
+    --bf-surface-active: rgba(255, 255, 255, 0.08);
+    --bf-surface-2: rgba(255, 255, 255, 0.09);
+    --bf-surface-elevated: var(--bf-bg-elevated);
+    /* AJOUTÉ (alias) */
+
+    /* Borders */
+    --bf-border: rgba(255, 255, 255, 0.08);
+    --bf-border-strong: rgba(255, 255, 255, 0.12);
+    --bf-border-subtle: rgba(255, 255, 255, 0.04);
+    --bf-border-hover: rgba(255, 255, 255, 0.15);
+
+    /* Text */
+    --bf-text: rgba(255, 255, 255, 0.95);
+    --bf-text-secondary: rgba(255, 255, 255, 0.80);
+    /* AJOUTÉ (alias) */
+    --bf-text-medium: rgba(255, 255, 255, 0.80);
+    --bf-muted: rgba(255, 255, 255, 0.65);
+    --bf-faint: rgba(255, 255, 255, 0.45);
+    --bf-text-disabled: rgba(255, 255, 255, 0.30);
+
+    /* Shadows */
+    --bf-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
+    /* AJOUTÉ */
+    --bf-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.4);
+    --bf-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+    --bf-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.5);
+    /* AJOUTÉ (alias cohérent) */
+    --bf-shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.4);
+    --bf-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6);
+    --bf-shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.7);
+
+    /* Focus & Interactions */
+    --bf-focus: rgba(196, 22, 28, 0.70);
+    /* AJOUTÉ (version sémantique) */
+    --bf-focus-ring: rgba(196, 22, 28, 0.20);
+    /* AJOUTÉ */
+    --bf-hover-overlay: rgba(255, 255, 255, 0.05);
+
+    /* Accent Red States */
+    --bf-accent-bg: rgba(196, 22, 28, 0.12);
+    --bf-accent-bg-hover: rgba(196, 22, 28, 0.18);
+    --bf-accent-border: rgba(196, 22, 28, 0.45);
+    --bf-accent-text: rgba(255, 255, 255, 0.95);
+
+    /* Architectural Lines */
+    --bf-arch-grid: rgba(255, 255, 255, 0.025);
+    --bf-arch-line: rgba(255, 255, 255, 0.05);
+    --bf-arch-line-accent: rgba(255, 42, 47, 0.08);
+    --bf-arch-glow-red: rgba(255, 42, 47, 0.10);
+    --bf-arch-glow-white: rgba(255, 255, 255, 0.04);
+
+    /* Panel / Cards */
+    --bf-panel: rgba(255, 255, 255, 0.03);
+    --bf-panel-border: rgba(255, 255, 255, 0.08);
+    --bf-panel-border-hover: rgba(255, 255, 255, 0.12);
+    --bf-corner-glow: rgba(255, 42, 47, 0.18);
+
+    /* Chips / Badges */
+    --bf-chip-bg: rgba(255, 255, 255, 0.05);
+    --bf-chip-border: rgba(255, 255, 255, 0.10);
+    --bf-badge-bg: rgba(255, 255, 255, 0.04);
+    --bf-badge-border: rgba(255, 255, 255, 0.10);
+    --bf-badge-text: rgba(255, 255, 255, 0.78);
+
+    /* Inputs */
+    --bf-input-bg: rgba(0, 0, 0, 0.35);
+    --bf-input-bg-hover: rgba(0, 0, 0, 0.45);
+    --bf-input-border: rgba(255, 255, 255, 0.10);
+    --bf-input-border-hover: rgba(255, 255, 255, 0.15);
+    --bf-input-border-focus: var(--bf-red);
+    --bf-input-focus: rgba(196, 22, 28, 0.75);
+    --bf-input-focus-ring: rgba(196, 22, 28, 0.18);
+    --bf-input-invalid: rgba(255, 77, 79, 0.75);
+    --bf-input-invalid-ring: rgba(255, 77, 79, 0.12);
+    --bf-input-placeholder: rgba(255, 255, 255, 0.40);
+
+    /* Choice / Radio / Checkbox */
+    --bf-choice-bg: rgba(255, 255, 255, 0.04);
+    --bf-choice-bg-hover: rgba(255, 255, 255, 0.06);
+    --bf-choice-border: rgba(255, 255, 255, 0.12);
+    --bf-choice-text: rgba(255, 255, 255, 0.86);
+    --bf-choice-dot-bg: rgba(0, 0, 0, 0.30);
+    --bf-choice-dot-border: rgba(255, 255, 255, 0.20);
+    --bf-choice-active-bg: rgba(196, 22, 28, 0.14);
+    --bf-choice-active-border: rgba(196, 22, 28, 0.75);
+
+    /* Stepper */
+    --bf-step-bg: rgba(255, 255, 255, 0.04);
+    --bf-step-bg-hover: rgba(255, 255, 255, 0.06);
+    --bf-step-border: rgba(255, 255, 255, 0.10);
+    --bf-step-text: rgba(255, 255, 255, 0.75);
+    --bf-step-number-bg: rgba(0, 0, 0, 0.30);
+    --bf-step-number-border: rgba(255, 255, 255, 0.12);
+
+    --bf-step-active-bg: rgba(196, 22, 28, 0.12);
+    --bf-step-active-border: rgba(196, 22, 28, 0.70);
+    --bf-step-active-text: rgba(255, 255, 255, 0.95);
+    --bf-step-active-glow: rgba(255, 42, 47, 0.15);
+    --bf-step-active-number-bg: rgba(196, 22, 28, 0.20);
+
+    --bf-step-done-bg: rgba(25, 195, 125, 0.08);
+    --bf-step-done-border: rgba(25, 195, 125, 0.40);
+    --bf-step-done-text: rgba(25, 195, 125, 0.95);
+    --bf-step-done-check: var(--bf-ok);
+
+    --bf-step-locked-opacity: 0.50;
+    --bf-step-connector: rgba(255, 255, 255, 0.08);
+    --bf-step-connector-done: var(--bf-ok);
+
+    /* Progress */
+    --bf-progress-bg: rgba(255, 255, 255, 0.06);
+    --bf-progress-fill: var(--bf-red);
+    --bf-progress-pill-bg: rgba(196, 22, 28, 0.12);
+    --bf-progress-pill-border: rgba(196, 22, 28, 0.45);
+    --bf-progress-pill-text: rgba(255, 255, 255, 0.88);
+
+    /* States */
+    --bf-success-bg: rgba(25, 195, 125, 0.10);
+    --bf-success-border: rgba(25, 195, 125, 0.40);
+    --bf-success-text: rgba(25, 195, 125, 0.95);
+
+    --bf-danger-bg: rgba(255, 77, 79, 0.10);
+    --bf-danger-border: rgba(255, 77, 79, 0.40);
+    --bf-danger-text: rgba(255, 77, 79, 0.95);
+    --bf-danger-chip-bg: rgba(255, 77, 79, 0.12);
+    --bf-danger-chip-border: rgba(255, 77, 79, 0.45);
+
+    --bf-warning-bg: rgba(245, 197, 66, 0.10);
+    --bf-warning-border: rgba(245, 197, 66, 0.40);
+    --bf-warning-text: rgba(245, 197, 66, 0.95);
+
+    /* Signature Canvas */
+    --bf-sign-title: rgba(255, 255, 255, 0.80);
+    --bf-sign-frame-bg: rgba(0, 0, 0, 0.30);
+    --bf-sign-frame-border: rgba(255, 255, 255, 0.18);
+    --bf-sign-hint-glow: rgba(255, 42, 47, 0.10);
+    --bf-sign-hint-card-bg: rgba(255, 255, 255, 0.06);
+    --bf-sign-hint-card-border: rgba(255, 255, 255, 0.10);
+    --bf-sign-hint-card-text: rgba(255, 255, 255, 0.85);
+    --bf-sign-hint-text: rgba(255, 255, 255, 0.65);
+    --bf-sign-note: rgba(255, 255, 255, 0.55);
+
+    /* Misc */
+    --bf-helper: rgba(255, 255, 255, 0.52);
+    --bf-json: rgba(255, 255, 255, 0.82);
+    --bf-line: rgba(255, 255, 255, 0.08);
+    --bf-line-2: rgba(255, 255, 255, 0.10);
+    --bf-soft: rgba(255, 255, 255, 0.06);
+    --bf-soft-2: rgba(255, 255, 255, 0.04);
+
+    /* Skeleton Loading */
+    --bf-skeleton-base: rgba(255, 255, 255, 0.04);
+    --bf-skeleton-shine: rgba(255, 255, 255, 0.10);
+
+    --bf-glass-bg: rgba(10, 10, 10, 0.75);
+    --bf-glass-border: rgba(255, 255, 255, 0.06);
+}
+
+/* ========================================
+   LIGHT THEME
+   ======================================== */
+:root[data-theme="light"] {
+    --bf-grade-a: #0e8a58;
+    --bf-grade-b: #4c8a1c;
+    --bf-grade-c: #9a6f00;
+    --bf-grade-d: #b8550c;
+    --bf-grade-e: #c81e23;
+
+    --bf-sign-ink: rgba(10, 10, 10, 0.90);
+
+    /* Base Surfaces */
+    --bf-bg: #f8f9fb;
+    --bf-bg-elevated: #ffffff;
+    --bf-surface: rgba(255, 255, 255, 0.85);
+    --bf-surface-hover: rgba(255, 255, 255, 0.92);
+    --bf-surface-active: rgba(255, 255, 255, 1);
+    --bf-surface-2: rgba(255, 255, 255, 0.70);
+    --bf-surface-elevated: var(--bf-bg-elevated);
+    /* AJOUTÉ (alias) */
+
+    /* Borders */
+    --bf-border: rgba(10, 10, 10, 0.08);
+    --bf-border-strong: rgba(10, 10, 10, 0.12);
+    --bf-border-subtle: rgba(10, 10, 10, 0.04);
+    --bf-border-hover: rgba(10, 10, 10, 0.15);
+
+    /* Text */
+    --bf-text: rgba(10, 10, 10, 0.95);
+    --bf-text-secondary: rgba(10, 10, 10, 0.80);
+    /* AJOUTÉ (alias) */
+    --bf-text-medium: rgba(10, 10, 10, 0.80);
+    --bf-muted: rgba(10, 10, 10, 0.60);
+    --bf-faint: rgba(10, 10, 10, 0.40);
+    --bf-text-disabled: rgba(10, 10, 10, 0.30);
+
+    /* Shadows */
+    --bf-shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    /* AJOUTÉ */
+    --bf-shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+    --bf-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    --bf-shadow-md: 0 8px 24px rgba(0, 0, 0, 0.12);
+    /* AJOUTÉ (alias cohérent) */
+    --bf-shadow-soft: 0 12px 32px rgba(0, 0, 0, 0.05);
+    --bf-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.08);
+    --bf-shadow-xl: 0 24px 64px rgba(0, 0, 0, 0.10);
+
+    /* Focus & Interactions */
+    --bf-focus: rgba(196, 22, 28, 0.55);
+    /* AJOUTÉ (version sémantique) */
+    --bf-focus-ring: rgba(196, 22, 28, 0.15);
+    /* AJOUTÉ */
+    --bf-hover-overlay: rgba(10, 10, 10, 0.03);
+
+    /* Accent Red States */
+    --bf-accent-bg: rgba(196, 22, 28, 0.08);
+    --bf-accent-bg-hover: rgba(196, 22, 28, 0.12);
+    --bf-accent-border: rgba(196, 22, 28, 0.35);
+    --bf-accent-text: rgba(10, 10, 10, 0.95);
+
+    /* Architectural Lines */
+    --bf-arch-grid: rgba(10, 10, 10, 0.020);
+    --bf-arch-line: rgba(10, 10, 10, 0.04);
+    --bf-arch-line-accent: rgba(196, 22, 28, 0.05);
+    --bf-arch-glow-red: rgba(196, 22, 28, 0.08);
+    --bf-arch-glow-white: rgba(0, 0, 0, 0.02);
+
+    /* Panel / Cards */
+    --bf-panel: rgba(255, 255, 255, 0.60);
+    --bf-panel-border: rgba(10, 10, 10, 0.08);
+    --bf-panel-border-hover: rgba(10, 10, 10, 0.12);
+    --bf-corner-glow: rgba(196, 22, 28, 0.10);
+
+    /* Chips / Badges */
+    --bf-chip-bg: rgba(255, 255, 255, 0.70);
+    --bf-chip-border: rgba(10, 10, 10, 0.10);
+    --bf-badge-bg: rgba(10, 10, 10, 0.04);
+    --bf-badge-border: rgba(10, 10, 10, 0.12);
+    --bf-badge-text: rgba(10, 10, 10, 0.75);
+
+    /* Inputs */
+    --bf-input-bg: rgba(255, 255, 255, 0.85);
+    --bf-input-bg-hover: rgba(255, 255, 255, 0.95);
+    --bf-input-border: rgba(10, 10, 10, 0.12);
+    --bf-input-border-hover: rgba(10, 10, 10, 0.18);
+    --bf-input-border-focus: var(--bf-red);
+    --bf-input-focus: rgba(196, 22, 28, 0.60);
+    --bf-input-focus-ring: rgba(196, 22, 28, 0.12);
+    --bf-input-invalid: rgba(255, 77, 79, 0.65);
+    --bf-input-invalid-ring: rgba(255, 77, 79, 0.08);
+    --bf-input-placeholder: rgba(10, 10, 10, 0.40);
+
+    /* Choice / Radio / Checkbox */
+    --bf-choice-bg: rgba(255, 255, 255, 0.75);
+    --bf-choice-bg-hover: rgba(255, 255, 255, 0.90);
+    --bf-choice-border: rgba(10, 10, 10, 0.12);
+    --bf-choice-text: rgba(10, 10, 10, 0.86);
+    --bf-choice-dot-bg: rgba(255, 255, 255, 0.70);
+    --bf-choice-dot-border: rgba(10, 10, 10, 0.18);
+    --bf-choice-active-bg: rgba(196, 22, 28, 0.10);
+    --bf-choice-active-border: rgba(196, 22, 28, 0.55);
+
+    /* Stepper */
+    --bf-step-bg: rgba(255, 255, 255, 0.80);
+    --bf-step-bg-hover: rgba(255, 255, 255, 0.92);
+    --bf-step-border: rgba(10, 10, 10, 0.10);
+    --bf-step-text: rgba(10, 10, 10, 0.75);
+    --bf-step-number-bg: rgba(10, 10, 10, 0.04);
+    --bf-step-number-border: rgba(10, 10, 10, 0.12);
+
+    --bf-step-active-bg: rgba(196, 22, 28, 0.10);
+    --bf-step-active-border: rgba(196, 22, 28, 0.50);
+    --bf-step-active-text: rgba(10, 10, 10, 0.95);
+    --bf-step-active-glow: rgba(196, 22, 28, 0.08);
+    --bf-step-active-number-bg: rgba(196, 22, 28, 0.15);
+
+    --bf-step-done-bg: rgba(25, 195, 125, 0.06);
+    --bf-step-done-border: rgba(25, 195, 125, 0.40);
+    --bf-step-done-text: rgba(15, 145, 95, 0.95);
+    --bf-step-done-check: var(--bf-ok-dark);
+
+    --bf-step-locked-opacity: 0.55;
+    --bf-step-connector: rgba(10, 10, 10, 0.08);
+    --bf-step-connector-done: var(--bf-ok-dark);
+
+    /* Progress */
+    --bf-progress-bg: rgba(10, 10, 10, 0.06);
+    --bf-progress-fill: var(--bf-red);
+    --bf-progress-pill-bg: rgba(196, 22, 28, 0.10);
+    --bf-progress-pill-border: rgba(196, 22, 28, 0.35);
+    --bf-progress-pill-text: rgba(10, 10, 10, 0.85);
+
+    /* States */
+    --bf-success-bg: rgba(25, 195, 125, 0.08);
+    --bf-success-border: rgba(25, 195, 125, 0.35);
+    --bf-success-text: rgba(15, 145, 95, 0.95);
+
+    --bf-danger-bg: rgba(255, 77, 79, 0.08);
+    --bf-danger-border: rgba(255, 77, 79, 0.35);
+    --bf-danger-text: rgba(200, 30, 35, 0.95);
+    --bf-danger-chip-bg: rgba(255, 77, 79, 0.10);
+    --bf-danger-chip-border: rgba(255, 77, 79, 0.40);
+
+    --bf-warning-bg: rgba(245, 197, 66, 0.08);
+    --bf-warning-border: rgba(245, 197, 66, 0.35);
+    --bf-warning-text: rgba(180, 130, 20, 0.95);
+
+    /* Signature Canvas */
+    --bf-sign-title: rgba(10, 10, 10, 0.78);
+    --bf-sign-frame-bg: rgba(255, 255, 255, 0.85);
+    --bf-sign-frame-border: rgba(10, 10, 10, 0.14);
+    --bf-sign-hint-glow: rgba(196, 22, 28, 0.06);
+    --bf-sign-hint-card-bg: rgba(255, 255, 255, 0.92);
+    --bf-sign-hint-card-border: rgba(10, 10, 10, 0.10);
+    --bf-sign-hint-card-text: rgba(10, 10, 10, 0.80);
+    --bf-sign-hint-text: rgba(10, 10, 10, 0.55);
+    --bf-sign-note: rgba(10, 10, 10, 0.50);
+
+    /* Misc */
+    --bf-helper: rgba(10, 10, 10, 0.45);
+    --bf-json: rgba(10, 10, 10, 0.80);
+    --bf-line: rgba(10, 10, 10, 0.06);
+    --bf-line-2: rgba(10, 10, 10, 0.08);
+    --bf-soft: rgba(255, 255, 255, 0.50);
+    --bf-soft-2: rgba(255, 255, 255, 0.35);
+
+    /* Skeleton Loading */
+    --bf-skeleton-base: rgba(10, 10, 10, 0.04);
+    --bf-skeleton-shine: rgba(10, 10, 10, 0.08);
+
+    --bf-glass-bg: rgba(255, 255, 255, 0.85);
+    --bf-glass-border: rgba(255, 255, 255, 0.40);
+}
+
+/* ========================================
+   ACCESSIBILITY & PERFORMANCE
+   ======================================== */
+
+/* Reduced Motion (respects user preference) */
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High Contrast Mode Support */
+@media (prefers-contrast: high) {
+    :root {
+        --bf-border: rgba(0, 0, 0, 0.3);
+        --bf-border-strong: rgba(0, 0, 0, 0.5);
+    }
+
+    :root[data-theme="dark"] {
+        --bf-border: rgba(255, 255, 255, 0.3);
+        --bf-border-strong: rgba(255, 255, 255, 0.5);
+    }
+}

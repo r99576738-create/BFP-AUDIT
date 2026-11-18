@@ -1,0 +1,23 @@
+<app-circular-header *ngIf="design === 'circular'" 
+    [data]="data" 
+    [isStepCompleted]="isStepCompleted"
+    [canGoTo]="canGoTo" 
+    [trackBySection]="trackBySection" 
+    (stepClick)="onStepClick($event)">
+</app-circular-header>
+
+<app-wave-header *ngIf="design === 'wave'" 
+    [data]="data" 
+    [isStepCompleted]="isStepCompleted"
+    [canGoTo]="canGoTo" 
+    [trackBySection]="trackBySection" 
+    (stepClick)="onStepClick($event)">
+</app-wave-header>
+
+<app-metro-header *ngIf="design === 'metro'" 
+    [data]="data" 
+    [isStepCompleted]="isStepCompleted"
+    [canGoTo]="canGoTo" 
+    [trackBySection]="trackBySection" 
+    (stepClick)="onStepClick($event)">
+</app-metro-header>

@@ -1,0 +1,192 @@
+:host { display: block; }
+
+.bf-detail {
+    display: grid;
+    gap: var(--bf-5);
+
+    .bf-pagehead { margin-bottom: 0; }
+}
+
+.bf-detail__skeleton { height: 320px; border-radius: var(--bf-r-lg); }
+
+.bf-detail__alert {
+    margin: 0;
+    padding: var(--bf-3) var(--bf-4);
+    border-radius: var(--bf-r-md);
+    font-size: var(--bf-text-sm);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--bf-3);
+
+    p { margin: 0; }
+
+    &--ok { background: var(--bf-success-bg); color: var(--bf-success-text); }
+    &--error { background: var(--bf-danger-bg); color: var(--bf-danger-text); }
+}
+
+/* ---------- HEADER ---------- */
+.bf-detail__head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: var(--bf-5);
+}
+
+.bf-detail__identity { display: grid; gap: var(--bf-2); min-width: 0; }
+
+.bf-detail__eyebrow {
+    color: var(--bf-red);
+    font-family: var(--bf-font-mono);
+    font-size: 11px;
+    font-weight: var(--bf-font-bold);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+}
+
+.bf-detail__title {
+    margin: 0;
+    font-family: var(--bf-font-display);
+    font-size: var(--bf-text-3xl);
+    line-height: var(--bf-leading-tight);
+    color: var(--bf-text);
+    overflow-wrap: anywhere;
+}
+
+.bf-detail__address { margin: 0; color: var(--bf-muted); }
+
+.bf-detail__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bf-2) var(--bf-6);
+    margin: var(--bf-2) 0 0;
+
+    dt { color: var(--bf-faint); font-size: var(--bf-text-xs); }
+    dd { margin: 0; color: var(--bf-text); font-weight: var(--bf-font-medium); }
+}
+
+.bf-detail__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--bf-2);
+
+    .bf-btn { padding: var(--bf-2) var(--bf-4); font-size: var(--bf-text-sm); }
+}
+
+/* ---------- SECTIONS ---------- */
+.bf-detail__section {
+    padding: var(--bf-5);
+
+    &:hover { transform: none; }
+
+    @media (min-width: 768px) { padding: var(--bf-6) var(--bf-8); }
+}
+
+.bf-detail__section-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bf-3);
+    margin-bottom: var(--bf-4);
+
+    h2 {
+        margin: 0;
+        font-family: var(--bf-font-display);
+        font-size: var(--bf-text-lg);
+        color: var(--bf-text);
+    }
+}
+
+.bf-detail__section-score {
+    padding: 4px 12px;
+    border-radius: var(--bf-r-full);
+    background: var(--bf-surface-active);
+    color: var(--bf-text);
+    font-family: var(--bf-font-display);
+    font-weight: var(--bf-font-bold);
+    font-size: var(--bf-text-sm);
+}
+
+.bf-detail__answers {
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--bf-4) var(--bf-6);
+}
+
+.bf-detail__divider {
+    grid-column: 1 / -1;
+    margin: var(--bf-2) 0 0;
+    color: var(--bf-faint);
+    font-size: var(--bf-text-xs);
+    font-weight: var(--bf-font-semibold);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.bf-detail__answer {
+    display: grid;
+    gap: 4px;
+    min-width: 0;
+    break-inside: avoid;
+
+    dt { color: var(--bf-muted); font-size: var(--bf-text-sm); }
+    dd { margin: 0; display: flex; align-items: center; flex-wrap: wrap; gap: var(--bf-2); }
+
+    &--wide { grid-column: 1 / -1; }
+}
+
+.bf-detail__text {
+    color: var(--bf-text);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+.bf-detail__empty { color: var(--bf-faint); }
+
+.bf-detail__yn {
+    padding: 2px 12px;
+    border-radius: var(--bf-r-full);
+    background: var(--bf-surface-active);
+    color: var(--bf-faint);
+    font-size: var(--bf-text-sm);
+    font-weight: var(--bf-font-semibold);
+
+    &--yes { background: var(--bf-success-bg); color: var(--bf-success-text); }
+    &--no { background: var(--bf-danger-bg); color: var(--bf-danger-text); }
+}
+
+.bf-detail__crit {
+    padding: 2px 10px;
+    border-radius: var(--bf-r-full);
+    background: var(--bf-danger-text);
+    color: var(--bf-white);
+    font-size: var(--bf-text-xs);
+    font-weight: var(--bf-font-bold);
+}
+
+.bf-detail__signature {
+    max-width: 320px;
+    width: 100%;
+    border-radius: var(--bf-r-md);
+    border: 1px solid var(--bf-border);
+}
+
+.bf-detail__footer {
+    margin: 0;
+    color: var(--bf-faint);
+    font-size: var(--bf-text-xs);
+    text-align: center;
+}
+
+/* L'encre est blanche ou noire selon le thème au moment de la signature : on la ramène à la couleur du texte. */
+.bf-detail__signature { filter: brightness(0); }
+:host-context([data-theme="dark"]) .bf-detail__signature { filter: brightness(0) invert(1); }
+
+@media print {
+    .bf-detail { gap: var(--bf-4); }
+    .bf-detail__section { padding: var(--bf-4) 0; border: none; box-shadow: none; }
+    .bf-detail__signature { filter: brightness(0) !important; }
+}

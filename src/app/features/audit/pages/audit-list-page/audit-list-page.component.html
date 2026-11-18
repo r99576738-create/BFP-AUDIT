@@ -1,0 +1,89 @@
+<main class="bf-container" role="main" [attr.dir]="i18n.dir">
+
+  <div class="bf-pagehead">
+    <div class="bf-pagehead__row">
+      <h1 class="bf-pagehead__title">
+        {{ i18n.tr('Audits', 'التدقيقات') }}
+        <span class="bf-pagehead__sub" *ngIf="!loading && !loadFailed">
+          {{ audits.length }} {{ audits.length > 1 ? i18n.tr('enregistrés', 'مسجّلة') : i18n.tr('enregistré', 'مسجّل') }}
+        </span>
+      </h1>
+      <a class="bf-btn bf-btn--primary" routerLink="/audits/new">
+        <svg class="bf-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+        </svg>
+        {{ i18n.tr('Nouvel audit', 'تدقيق جديد') }}
+      </a>
+    </div>
+  </div>
+
+  <div class="bf-list-search" *ngIf="!loading && !loadFailed && audits.length">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2" />
+      <path d="m20 20-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+    </svg>
+    <input class="bf-input" type="search" [(ngModel)]="query"
+      [placeholder]="i18n.tr('Rechercher une salle, une ville, un auditeur…', 'ابحث عن قاعة، مدينة، مدقق…')"
+      [attr.aria-label]="i18n.tr('Rechercher', 'بحث')" />
+  </div>
+
+  <!-- Chargement -->
+  <ul class="bf-list" *ngIf="loading" aria-busy="true">
+    <li *ngFor="let i of [1, 2, 3]" class="bf-list__skeleton bf-skeleton"></li>
+  </ul>
+
+  <!-- Erreur -->
+  <div *ngIf="!loading && loadFailed" class="bf-list-state bf-list-state--error" role="alert">
+    <p>{{ i18n.tr('Impossible de charger les audits. Vérifiez votre connexion.', 'تعذّر تحميل التدقيقات. تحقّق من الاتصال.') }}</p>
+    <button class="bf-btn bf-btn--secondary" type="button" (click)="load()">{{ i18n.tr('Réessayer', 'إعادة المحاولة') }}</button>
+  </div>
+
+  <!-- Aucun audit -->
+  <div *ngIf="!loading && !loadFailed && !audits.length" class="bf-list-state">
+    <span class="bf-list-state__icon" aria-hidden="true">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+        <path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2M9 5a2 2 0 0 0 2 2h2a2 2 0 0 0 2-2M9 5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+      </svg>
+    </span>
+    <p class="bf-list-state__title">{{ i18n.tr('Aucun audit pour l’instant', 'لا توجد تدقيقات بعد') }}</p>
+    <p>{{ i18n.tr('Les audits enregistrés apparaîtront ici avec leur note.', 'ستظهر التدقيقات المحفوظة هنا مع نتيجتها.') }}</p>
+    <a class="bf-btn bf-btn--primary" routerLink="/audits/new">{{ i18n.tr('Commencer un audit', 'ابدأ تدقيقًا') }}</a>
+  </div>
+
+  <!-- Aucun résultat -->
+  <div *ngIf="!loading && audits.length && !filtered.length" class="bf-list-state">
+    <p>{{ i18n.tr('Aucun audit ne correspond à « ' + query + ' ».', 'لا يوجد تدقيق يطابق «' + query + '».') }}</p>
+  </div>
+
+  <!-- Liste -->
+  <ul class="bf-list" *ngIf="!loading && filtered.length">
+    <li class="bf-list__head" aria-hidden="true">
+      <span>{{ i18n.tr('Salle', 'القاعة') }}</span>
+      <span>{{ i18n.tr('Date', 'التاريخ') }}</span>
+      <span>{{ i18n.tr('Auditeur', 'المدقق') }}</span>
+      <span>{{ i18n.tr('Points critiques', 'نقاط حرجة') }}</span>
+      <span>{{ i18n.tr('Note', 'النتيجة') }}</span>
+    </li>
+    <li *ngFor="let a of filtered; trackBy: trackById">
+      <a class="bf-list__row" [routerLink]="['/audits', a.id]">
+        <span class="bf-list__gym">
+          <strong>{{ a.gym_name }}</strong>
+          <small>{{ place(a) || '—' }}</small>
+        </span>
+        <span class="bf-list__cell" [attr.data-label]="i18n.tr('Date', 'التاريخ')">{{ formatDate(a.audit_date) }}</span>
+        <span class="bf-list__cell" [attr.data-label]="i18n.tr('Auditeur', 'المدقق')">{{ a.auditor_name || '—' }}</span>
+        <span class="bf-list__cell">
+          <span class="bf-list__crit" *ngIf="a.critical_count">
+            {{ a.critical_count }} {{ i18n.tr(a.critical_count > 1 ? 'critiques' : 'critique', 'حرجة') }}
+          </span>
+          <span class="bf-list__ok" *ngIf="!a.critical_count">{{ i18n.tr('Aucun', 'لا شيء') }}<span class="bf-list__mobile-only"> {{ i18n.tr('point critique', 'من النقاط الحرجة') }}</span></span>
+        </span>
+        <span class="bf-list__score">
+          <span class="bf-list__score-num">{{ a.score | number:'1.0-1' }}<small>/100</small></span>
+          <span class="bf-grade" [ngClass]="'bf-grade--' + a.grade.toLowerCase()">{{ a.grade }}</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+</main>

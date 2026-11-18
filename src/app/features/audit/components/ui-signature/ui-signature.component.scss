@@ -1,0 +1,266 @@
+/* ========================================
+   SIGNATURE COMPONENT — Canvas Pad Styles
+   ======================================== */
+
+:host {
+    display: block;
+}
+
+/* ============ CONTAINER ============ */
+.bf-signature {
+    display: grid;
+    gap: var(--bf-3);
+    
+    transition: opacity var(--bf-fast) var(--bf-ease);
+    
+    &--disabled {
+        opacity: 0.6;
+        pointer-events: none;
+    }
+}
+
+/* ============ HEADER ============ */
+.bf-signature__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bf-3);
+}
+
+.bf-signature__title {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bf-2);
+    
+    font-size: var(--bf-text-xs);
+    font-weight: var(--bf-font-bold);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--bf-sign-title);
+}
+
+.bf-signature__dot {
+    flex-shrink: 0;
+    width: 8px;
+    height: 8px;
+    border-radius: var(--bf-r-full);
+    background: linear-gradient(135deg, var(--bf-red-bright), var(--bf-red));
+    box-shadow: 
+        0 2px 8px rgba(255, 42, 47, 0.3),
+        0 8px 24px rgba(255, 42, 47, 0.2);
+    animation: bf-signature-pulse 2s var(--bf-ease) infinite;
+}
+
+@keyframes bf-signature-pulse {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.8;
+    }
+}
+
+.bf-signature__required {
+    color: var(--bf-red);
+    font-weight: var(--bf-font-bold);
+    margin-inline-start: var(--bf-1);
+}
+
+/* ============ TOOLS ============ */
+.bf-signature__tools {
+    display: inline-flex;
+    gap: var(--bf-2);
+}
+
+.bf-signature__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bf-2);
+    
+    padding: var(--bf-2) var(--bf-3);
+    font-size: var(--bf-text-xs);
+    
+    &[disabled] {
+        opacity: 0.4;
+        cursor: not-allowed;
+        transform: none !important;
+    }
+    
+    svg {
+        flex-shrink: 0;
+    }
+}
+
+/* ============ CANVAS FRAME ============ */
+.bf-signature__frame {
+    position: relative;
+    
+    border-radius: var(--bf-r-md);
+    border: 2px dashed var(--bf-sign-frame-border);
+    background: var(--bf-sign-frame-bg);
+    
+    overflow: hidden;
+    
+    transition: 
+        border-color var(--bf-fast) var(--bf-ease),
+        box-shadow var(--bf-fast) var(--bf-ease),
+        background var(--bf-fast) var(--bf-ease);
+    &:hover:not(.bf-signature--disabled) {
+        border-color: var(--bf-sign-frame-border-hover);
+        box-shadow: var(--bf-shadow-md);
+    }
+    
+    &--active {
+        border-color: var(--bf-focus);
+        border-style: solid;
+        box-shadow: 
+            var(--bf-shadow-md),
+            0 0 0 3px var(--bf-focus-ring);
+    }
+}
+
+.bf-signature--empty .bf-signature__frame {
+    border-style: dashed;
+}
+
+/* ============ CANVAS ============ */
+.bf-signature__canvas {
+    display: block;
+    width: 100%;
+    height: 180px;
+    
+    touch-action: none;
+    cursor: crosshair;
+    
+    @media (max-width: 640px) {
+        height: 150px;
+    }
+}
+
+.bf-signature--disabled .bf-signature__canvas {
+    cursor: not-allowed;
+}
+
+/* ============ HINT OVERLAY ============ */
+.bf-signature__hint {
+    position: absolute;
+    inset: 0;
+    
+    display: grid;
+    place-items: center;
+    
+    pointer-events: none;
+    
+    background: radial-gradient(
+        ellipse 800px 250px at 50% 30%,
+        var(--bf-sign-hint-glow),
+        transparent 70%
+    );
+    
+    animation: bf-hint-fade-in var(--bf-med) var(--bf-ease);
+}
+
+@keyframes bf-hint-fade-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.bf-signature__hint-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--bf-3);
+    
+    padding: var(--bf-4);
+    
+    border-radius: var(--bf-r-lg);
+    border: 1px solid var(--bf-sign-hint-card-border);
+    background: var(--bf-sign-hint-card-bg);
+    
+    box-shadow: var(--bf-shadow-lg);
+    
+    backdrop-filter: blur(8px);
+}
+
+.bf-signature__hint-icon {
+    width: 48px;
+    height: 48px;
+    
+    display: grid;
+    place-items: center;
+    
+    border-radius: var(--bf-r-md);
+    background: var(--bf-surface-active);
+    color: var(--bf-sign-hint-card-text);
+    
+    animation: bf-hint-icon-float 3s var(--bf-ease) infinite;
+}
+
+@keyframes bf-hint-icon-float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+}
+
+.bf-signature__hint-text {
+    margin: 0;
+    
+    font-size: var(--bf-text-xs);
+    color: var(--bf-sign-hint-text);
+    text-align: center;
+    
+    max-width: 28ch;
+    line-height: var(--bf-leading-relaxed);
+}
+
+/* ============ FOOTER ============ */
+.bf-signature__footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.bf-signature__note {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bf-2);
+    
+    margin: 0;
+    
+    font-size: var(--bf-text-2xs);
+    color: var(--bf-sign-note);
+    
+    svg {
+        flex-shrink: 0;
+        opacity: 0.7;
+    }
+}
+
+/* ============ RTL ADJUSTMENTS ============ */
+html[dir="rtl"] {
+    .bf-signature__tools {
+        flex-direction: row-reverse;
+    }
+}
+
+/* ============ PRINT STYLES ============ */
+@media print {
+    .bf-signature__header,
+    .bf-signature__footer,
+    .bf-signature__hint {
+        display: none;
+    }
+    
+    .bf-signature__frame {
+        border: 1px solid #ddd;
+    }
+}

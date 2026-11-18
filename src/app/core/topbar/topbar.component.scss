@@ -1,0 +1,342 @@
+/* ========================================
+   TOPBAR & LAYOUT — Premium Glassmorphism
+   ======================================== */
+
+:host {
+    display: block;
+    position: sticky;
+    top: 0;
+    z-index: var(--bf-z-topbar);
+
+    --header-height: 72px;
+    --glass-blur: 16px;
+    --glass-saturation: 180%;
+}
+
+/* ========================================
+   2. TOPBAR (Sticky Glass Header)
+   ======================================== */
+.bf-topbar {
+    position: relative;
+    height: var(--header-height);
+    width: 100%;
+    
+    /* GLASSMORPHISM AVANCÉ */
+    background: color-mix(in srgb, var(--bf-bg) 85%, transparent);
+    border-bottom: 1px solid var(--bf-border-subtle);
+    backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    -webkit-backdrop-filter: blur(var(--glass-blur)) saturate(var(--glass-saturation));
+    
+    transition: 
+        background var(--bf-med) var(--bf-ease),
+        border-color var(--bf-med) var(--bf-ease),
+        box-shadow var(--bf-med) var(--bf-ease);
+
+    /* Glow ambiant sur le haut de page */
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        background: radial-gradient(
+            circle at 50% -100%, 
+            var(--bf-arch-glow-red), 
+            transparent 70%
+        );
+        opacity: 0.4;
+    }
+}
+
+.bf-topbar__inner {
+    height: 100%;
+    max-width: var(--bf-container-max);
+    margin: 0 auto;
+    padding: 0 var(--bf-container-padding);
+    
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--bf-4);
+}
+
+/* ============ BRAND IDENTITY ============ */
+.bf-brand {
+    display: flex;
+    align-items: center;
+    gap: var(--bf-3);
+    text-decoration: none;
+    user-select: none;
+}
+
+.bf-brand__mark {
+    position: relative;
+    width: 42px; 
+    height: 42px;
+    border-radius: var(--bf-r-sm);
+    overflow: hidden;
+    
+    /* Bordure interne pour la netteté */
+    border: 1px solid var(--bf-border-subtle);
+    box-shadow: var(--bf-shadow-sm);
+    
+    img {
+        width: 100%; height: 100%;
+        object-fit: cover;
+        display: block;
+    }
+    
+    /* Glow interne animé */
+    .bf-brand__glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 50% 0%, var(--bf-red) 0%, transparent 60%);
+        mix-blend-mode: overlay;
+        opacity: 0.6;
+    }
+}
+
+.bf-brand__text {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.bf-brand__name {
+    margin: 0;
+    font-family: var(--bf-font-display);
+    font-size: var(--bf-text-base);
+    font-weight: 800; /* Extra bold pour l'impact */
+    letter-spacing: -0.02em;
+    color: var(--bf-text);
+    line-height: 1;
+}
+
+.bf-brand__sub {
+    margin: 0;
+    font-family: var(--bf-font-mono);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--bf-red);
+    font-weight: var(--bf-font-bold);
+    margin-top: 2px;
+}
+
+/* ============ ACTIONS AREA ============ */
+.bf-topbar__actions {
+    display: flex;
+    align-items: center;
+    gap: var(--bf-3);
+}
+
+/* ============ LANGUAGE SWITCHER (Sliding Pill) ============ */
+.bf-seg {
+    position: relative;
+    display: inline-flex;
+    background: var(--bf-surface-active); /* Fond gris clair/foncé */
+    padding: 3px;
+    border-radius: 999px;
+    border: 1px solid var(--bf-border);
+}
+
+.bf-seg__btn {
+    position: relative;
+    z-index: 2; /* Au-dessus de la pilule */
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    
+    padding: 4px 12px;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    
+    font-family: var(--bf-font-mono);
+    font-size: 11px;
+    font-weight: var(--bf-font-bold);
+    color: var(--bf-muted);
+    transition: color var(--bf-fast) var(--bf-ease);
+
+    span { font-size: 1.2em; filter: grayscale(1); transition: filter 0.2s; }
+
+    /* État Actif (Texte) */
+    &.is-active {
+        color: var(--bf-white); /* Toujours blanc sur la pilule rouge */
+        span { filter: grayscale(0); }
+    }
+    
+    &:hover:not(.is-active) { color: var(--bf-text); }
+}
+
+/* La Pilule Rouge Animée */
+.bf-seg__pill {
+    position: absolute;
+    top: 3px; bottom: 3px;
+    width: calc(50% - 3px); /* Hypothèse: 2 boutons égaux */
+    background: var(--bf-red);
+    border-radius: 999px;
+    z-index: 1;
+    box-shadow: 0 2px 8px rgba(196, 22, 28, 0.4);
+    
+    /* Animation fluide */
+    transition: transform var(--bf-med) var(--bf-ease-bounce);
+    
+    /* Position par défaut (LTR: Gauche / RTL: Droite) */
+    left: 3px; 
+    transform: translateX(0);
+}
+
+/* Logique de positionnement via l'attribut parent du header */
+/* Si Langue = AR (le 2ème bouton) */
+.bf-topbar[data-locale="ar"] .bf-seg__pill {
+    transform: translateX(100%);
+}
+
+/* ============ THEME TOGGLE (Day/Night) ============ */
+.bf-theme {
+    appearance: none;
+    background: transparent;
+    border: none;
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: var(--bf-2);
+}
+
+.bf-theme__track {
+    position: relative;
+    width: 44px; height: 26px;
+    background: var(--bf-surface-2);
+    border: 1px solid var(--bf-border);
+    border-radius: 999px;
+    transition: background var(--bf-fast) var(--bf-ease);
+    overflow: hidden;
+
+    &:hover { border-color: var(--bf-border-hover); }
+}
+
+.bf-theme__thumb {
+    position: absolute;
+    top: 3px; left: 3px;
+    width: 18px; height: 18px;
+    background: var(--bf-bg-elevated);
+    border-radius: 50%;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    
+    display: grid;
+    place-items: center;
+    color: var(--bf-text);
+    
+    /* Animation "Spring" */
+    transition: transform var(--bf-med) var(--bf-ease-bounce);
+    
+    /* Dark Mode State */
+    .bf-topbar[data-theme="dark"] & {
+        transform: translateX(18px);
+        background: var(--bf-text); /* Thumb devient clair en dark mode */
+        color: var(--bf-bg); /* Icone devient sombre */
+    }
+}
+
+.bf-theme__icon {
+    position: absolute;
+    transition: 
+        transform var(--bf-med) var(--bf-ease-bounce),
+        opacity var(--bf-fast) var(--bf-ease);
+        
+    /* Sun Defaults */
+    &--sun { opacity: 1; transform: rotate(0); }
+    &--moon { opacity: 0; transform: rotate(90deg) scale(0.5); }
+    
+    /* Dark Mode Icons */
+    .bf-topbar[data-theme="dark"] & {
+        &--sun { opacity: 0; transform: rotate(-90deg) scale(0.5); }
+        &--moon { opacity: 1; transform: rotate(0) scale(1); }
+    }
+}
+
+.bf-theme__label {
+    font-size: var(--bf-text-xs);
+    font-weight: var(--bf-font-bold);
+    color: var(--bf-muted);
+    @media (max-width: 640px) { display: none; }
+}
+
+/* ============ RESET BUTTON (Ghost) ============ */
+.bf-btn--ghost {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bf-2);
+    height: 32px;
+    padding: 0 12px;
+    
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: var(--bf-r-full);
+    
+    color: var(--bf-muted);
+    font-size: var(--bf-text-sm);
+    font-weight: var(--bf-font-medium);
+    cursor: pointer;
+    transition: all var(--bf-fast) var(--bf-ease);
+    
+    &:hover {
+        background: var(--bf-danger-bg);
+        color: var(--bf-bad);
+        border-color: var(--bf-danger-chip-border);
+    }
+
+    @media (max-width: 480px) {
+        span { display: none; } /* Icon only on mobile */
+        padding: 0 8px;
+    }
+}
+
+/* ========================================
+   4. RTL OVERRIDES (Si Logical Props ne suffisent pas)
+   ======================================== */
+:host-context([dir="rtl"]) {
+    .bf-seg__pill { left: auto; right: 3px; }
+    /* Flip icons that indicate direction */
+    .bf-btn__icon { transform: scaleX(-1); }
+    
+    /* Inversion de la logique du switch langue */
+    /* En RTL, si 'ar' est sélectionné (2ème btn), on translate vers la gauche (négatif) ou droite ? 
+       Standard CSS RTL : translateX(100%) va vers la GAUCHE visuellement selon l'axe.
+       Ajustement fin selon moteur de rendu : */
+    .bf-topbar[data-locale="ar"] .bf-seg__pill {
+        transform: translateX(-100%); 
+    }
+}
+
+/* ============ NAVIGATION ============ */
+.bf-brand { color: inherit; }
+
+.bf-navlink {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--bf-2);
+    height: 32px;
+    padding: 0 12px;
+    border-radius: var(--bf-r-full);
+    color: var(--bf-muted);
+    font-size: var(--bf-text-sm);
+    font-weight: var(--bf-font-semibold);
+    text-decoration: none;
+    transition: background var(--bf-fast) var(--bf-ease), color var(--bf-fast) var(--bf-ease);
+
+    &:hover { color: var(--bf-text); background: var(--bf-surface-hover); }
+    &.is-active { color: var(--bf-text); background: var(--bf-surface-active); }
+}
+
+@media (max-width: 520px) {
+    .bf-topbar__actions { gap: var(--bf-2); }
+    .bf-brand__text { display: none; }
+    .bf-navlink span { display: none; }
+    .bf-navlink { padding: 0 8px; }
+}
+
+@media print {
+    :host { display: none; }
+}

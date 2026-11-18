@@ -1,0 +1,70 @@
+<!-- ========================================
+     AUDIT WIZARD — Multi-step Form Premium
+     ======================================== -->
+<section class="bf-wizard" [class.bf-wizard--pulse]="savingPulse" [attr.dir]="i18n.dir" role="region"
+  aria-label="Audit wizard">
+
+  <!-- Design Switcher (Floating) -->
+  <app-design-switcher [currentDesign]="headerDesign" (designChange)="onDesignChange($event)">
+  </app-design-switcher>
+
+  <!-- Header dynamique -->
+  <app-wizard-header [design]="headerDesign" [data]="headerData" (stepChange)="onStepChange($event)">
+  </app-wizard-header>
+
+  <!-- ============ STEP CONTENT ============ -->
+  <div class="bf-wizard__content">
+    <app-audit-step [section]="currentSection" [form]="form"></app-audit-step>
+  </div>
+
+  <!-- ============ NAVIGATION ACTIONS ============ -->
+  <div class="bf-wizard__live" *ngIf="showLiveScore && liveScore">
+    <span class="bf-wizard__live-label">{{ i18n.tr('Note provisoire', 'نتيجة مؤقتة') }}</span>
+    <span class="bf-wizard__live-score">{{ liveScore.score | number:'1.0-1' }}<small>/100</small></span>
+    <span class="bf-grade" [ngClass]="'bf-grade--' + liveScore.grade.toLowerCase()">{{ liveScore.grade }}</span>
+    <span class="bf-wizard__live-crit" *ngIf="liveScore.criticalFailures.length">
+      {{ liveScore.criticalFailures.length }} {{ i18n.tr(liveScore.criticalFailures.length > 1 ? 'points critiques' : 'point critique', 'نقاط حرجة') }}
+    </span>
+  </div>
+
+  <p class="bf-wizard__error" *ngIf="saveError" role="alert">{{ saveError }}</p>
+
+  <div class="bf-wizard__actions">
+
+    <!-- Previous Button -->
+    <button class="bf-btn bf-btn--secondary bf-wizard__btn" type="button" (click)="prev()" [disabled]="stepIndex === 0"
+      [attr.aria-label]="i18n.locale === 'ar' ? 'الخطوة السابقة' : 'Étape précédente'">
+      <svg class="bf-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+        <path d="M15 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+          stroke-linejoin="round" />
+      </svg>
+      <span>{{ i18n.locale === 'ar' ? 'السابق' : 'Précédent' }}</span>
+    </button>
+
+    <!-- Right Actions Group -->
+    <div class="bf-wizard__actions-right">
+
+      <!-- Next Button -->
+      <button class="bf-btn bf-wizard__btn" type="button" (click)="next()" *ngIf="stepIndex < totalSteps - 1"
+        [attr.aria-label]="i18n.locale === 'ar' ? 'الخطوة التالية' : 'Étape suivante'">
+        <span>{{ i18n.locale === 'ar' ? 'التالي' : 'Suivant' }}</span>
+        <svg class="bf-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M9 18l6-6-6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+
+      <!-- Submit Button -->
+      <button class="bf-btn bf-btn--primary bf-wizard__btn" type="button" (click)="submit()"
+        *ngIf="stepIndex === totalSteps - 1" [disabled]="saving"
+        [attr.aria-label]="i18n.tr('Enregistrer l\'audit', 'حفظ التدقيق')">
+        <span>{{ saving ? i18n.tr('Enregistrement…', 'جارٍ الحفظ…') : i18n.tr('Enregistrer', 'حفظ') }}</span>
+        <svg class="bf-btn__icon" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+</section>

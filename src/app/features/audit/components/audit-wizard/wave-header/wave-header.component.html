@@ -1,0 +1,136 @@
+<div class="bf-card bf-wizard__header bf-wizard__header--wave">
+  
+  <!-- Animated Wave Background -->
+  <div class="bf-wizard__wave-bg">
+    <svg class="bf-wizard__wave" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,0 C300,60 600,60 900,30 L1200,60 L1200,120 L0,120 Z" />
+    </svg>
+    <svg class="bf-wizard__wave bf-wizard__wave--2" viewBox="0 0 1200 120" preserveAspectRatio="none">
+      <path d="M0,30 C400,80 800,20 1200,50 L1200,120 L0,120 Z" />
+    </svg>
+  </div>
+
+  <div class="bf-card__body bf-wizard__header-body">
+
+    <!-- Compact Title Row -->
+    <div class="bf-wizard__compact-header">
+      <div class="bf-wizard__breadcrumb">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <path d="M9 11l3 3L22 4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+        <span>{{ stepLabel }}</span>
+        <span class="bf-wizard__separator">•</span>
+        <strong>{{ data.currentSection.title[data.locale] }}</strong>
+      </div>
+
+      <div class="bf-wizard__mini-progress">
+        <span class="bf-wizard__mini-label">{{ data.progressPercent }}%</span>
+        <div class="bf-wizard__mini-bar">
+          <div 
+            class="bf-wizard__mini-fill"
+            [style.width.%]="data.progressPercent">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Horizontal Timeline with River Flow -->
+    <div class="bf-wizard__river">
+      <div class="bf-wizard__river-track">
+        
+        <!-- Flow Line -->
+        <div class="bf-wizard__flow-line">
+          <div 
+            class="bf-wizard__flow-fill"
+            [style.width.%]="flowFillWidth">
+          </div>
+          
+          <!-- Animated Particles -->
+          <div 
+            class="bf-wizard__particle" 
+            *ngFor="let p of particles">
+          </div>
+        </div>
+
+        <!-- Step Nodes -->
+        <button
+          *ngFor="let section of data.sections; let i = index; trackBy: trackBySection"
+          type="button"
+          class="bf-wizard__river-node"
+          [class.bf-wizard__river-node--active]="i === data.stepIndex"
+          [class.bf-wizard__river-node--done]="isStepCompleted(i)"
+          [class.bf-wizard__river-node--locked]="!canGoTo(i)"
+          [disabled]="!canGoTo(i)"
+          (click)="stepClick.emit(i)"
+          [style.left.%]="getNodePosition(i)"
+          [attr.aria-label]="section.title[data.locale]">
+          
+          <!-- Node Ripple (only on active) -->
+          <span 
+            class="bf-wizard__ripple" 
+            *ngIf="i === data.stepIndex">
+          </span>
+          
+          <!-- Node Core -->
+          <span class="bf-wizard__core">
+            <!-- Checkmark for completed steps -->
+            <svg 
+              *ngIf="isStepCompleted(i)" 
+              width="16" 
+              height="16" 
+              viewBox="0 0 24 24" 
+              fill="none"
+              aria-hidden="true">
+              <path 
+                d="M5 13l4 4L19 7" 
+                stroke="currentColor" 
+                stroke-width="3" 
+                stroke-linecap="round"/>
+            </svg>
+            
+            <!-- Lock icon for locked steps -->
+            <svg 
+              *ngIf="!canGoTo(i) && !isStepCompleted(i)" 
+              width="12" 
+              height="12" 
+              viewBox="0 0 24 24" 
+              fill="none"
+              aria-hidden="true">
+              <rect 
+                x="5" 
+                y="11" 
+                width="14" 
+                height="10" 
+                rx="2" 
+                stroke="currentColor" 
+                stroke-width="2"/>
+              <path 
+                d="M7 11V7a5 5 0 0110 0v4" 
+                stroke="currentColor" 
+                stroke-width="2"/>
+            </svg>
+            
+            <!-- Step number for accessible/pending steps -->
+            <span *ngIf="canGoTo(i) && !isStepCompleted(i)">
+              {{ i + 1 }}
+            </span>
+          </span>
+
+          <!-- Node Tooltip (Desktop only) -->
+          <span class="bf-wizard__tooltip">
+            <span class="bf-wizard__tooltip-title">
+              {{ section.title[data.locale] }}
+            </span>
+            <span 
+              class="bf-wizard__tooltip-status" 
+              *ngIf="isStepCompleted(i)">
+              ✓ {{ data.locale === 'ar' ? 'مكتمل' : 'Complété' }}
+            </span>
+          </span>
+        </button>
+
+      </div>
+    </div>
+
+  </div>
+</div>

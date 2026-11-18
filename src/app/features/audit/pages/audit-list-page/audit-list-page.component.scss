@@ -1,0 +1,167 @@
+:host { display: block; }
+
+.bf-list-search {
+    position: relative;
+    margin-bottom: var(--bf-5);
+
+    svg {
+        position: absolute;
+        inset-inline-start: 14px;
+        top: 50%;
+        transform: translateY(-50%);
+        color: var(--bf-faint);
+        pointer-events: none;
+    }
+
+    .bf-input {
+        padding-inline-start: 44px;
+        &:focus { transform: none; }
+    }
+}
+
+.bf-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--bf-2);
+
+    --cols: minmax(0, 2.4fr) minmax(0, 1fr) minmax(0, 1.3fr) minmax(0, 1fr) 150px;
+}
+
+.bf-list__head {
+    display: grid;
+    grid-template-columns: var(--cols);
+    gap: var(--bf-4);
+    padding: 0 var(--bf-5) var(--bf-1);
+    color: var(--bf-faint);
+    font-size: var(--bf-text-xs);
+    font-weight: var(--bf-font-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+
+    span:last-child { text-align: end; }
+}
+
+.bf-list__row {
+    display: grid;
+    grid-template-columns: var(--cols);
+    align-items: center;
+    gap: var(--bf-4);
+    padding: var(--bf-4) var(--bf-5);
+    border-radius: var(--bf-r-lg);
+    background: var(--bf-surface);
+    border: 1px solid var(--bf-border);
+    color: var(--bf-text);
+    text-decoration: none;
+    transition: background var(--bf-fast) var(--bf-ease), border-color var(--bf-fast) var(--bf-ease);
+
+    &:hover { background: var(--bf-surface-hover); border-color: var(--bf-border-strong); }
+    &:focus-visible { outline: none; box-shadow: 0 0 0 3px var(--bf-focus-ring); }
+}
+
+.bf-list__gym {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+
+    strong { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    small { color: var(--bf-muted); font-size: var(--bf-text-xs); }
+}
+
+.bf-list__cell {
+    color: var(--bf-muted);
+    font-size: var(--bf-text-sm);
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.bf-list__crit {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: var(--bf-r-full);
+    background: var(--bf-danger-bg);
+    color: var(--bf-danger-text);
+    font-size: var(--bf-text-xs);
+    font-weight: var(--bf-font-semibold);
+}
+
+.bf-list__ok { color: var(--bf-faint); }
+
+.bf-list__mobile-only { display: none; }
+
+.bf-list__score {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: var(--bf-3);
+}
+
+.bf-list__score-num {
+    font-family: var(--bf-font-display);
+    font-weight: var(--bf-font-bold);
+    font-size: var(--bf-text-lg);
+
+    small { color: var(--bf-faint); font-size: var(--bf-text-xs); font-weight: var(--bf-font-medium); }
+}
+
+.bf-list__skeleton {
+    height: 72px;
+    border-radius: var(--bf-r-lg);
+}
+
+/* ---------- STATES ---------- */
+.bf-list-state {
+    display: grid;
+    justify-items: center;
+    gap: var(--bf-3);
+    padding: var(--bf-10) var(--bf-5);
+    border-radius: var(--bf-r-lg);
+    background: var(--bf-surface);
+    text-align: center;
+    color: var(--bf-muted);
+
+    p { margin: 0; }
+
+    &--error { background: var(--bf-danger-bg); color: var(--bf-danger-text); }
+}
+
+.bf-list-state__icon {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: var(--bf-r-full);
+    background: var(--bf-accent-bg);
+    color: var(--bf-accent-text);
+}
+
+.bf-list-state__title {
+    color: var(--bf-text);
+    font-weight: var(--bf-font-semibold);
+    font-size: var(--bf-text-lg);
+}
+
+/* ---------- MOBILE: cards ---------- */
+@media (max-width: 760px) {
+    .bf-list__head { display: none; }
+    .bf-list__mobile-only { display: inline; }
+
+    .bf-list__row {
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+            "gym score"
+            "date crit"
+            "auditor auditor";
+        gap: var(--bf-2) var(--bf-3);
+        padding: var(--bf-4);
+    }
+
+    .bf-list__gym { grid-area: gym; }
+    .bf-list__score { grid-area: score; }
+    .bf-list__cell:nth-of-type(2) { grid-area: date; }
+    .bf-list__cell:nth-of-type(3) { grid-area: auditor; }
+    .bf-list__cell:nth-of-type(4) { grid-area: crit; justify-self: end; }
+}

@@ -1,0 +1,281 @@
+/* ========================================
+   DIGITAL TIMELINE — Tech & Precision
+   ======================================== */
+:host {
+  display: block;
+  --dt-height: 140px;
+  --dt-color-primary: var(--bf-red); /* Ou une autre couleur accent */
+  --dt-line-h: 2px; /* Ligne très fine */
+  --dt-node-size: 32px;
+}
+
+.bf-wizard__header--digital {
+  background: var(--bf-surface);
+  border: 1px solid var(--bf-border-subtle);
+  border-radius: var(--bf-r-lg); /* Moins arrondi, plus carré */
+  box-shadow: var(--bf-shadow-sm);
+  position: relative;
+  overflow: visible; /* Important pour les labels qui dépassent */
+}
+
+.bf-card__body {
+  padding: var(--bf-6) var(--bf-8);
+  min-height: var(--dt-height);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--bf-6);
+}
+
+/* ========================================
+   TOP INFO
+   ======================================== */
+.bf-digital__info {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--bf-border-subtle);
+  padding-bottom: var(--bf-4);
+  margin-bottom: var(--bf-2);
+  
+  @media (max-width: 640px) {
+    flex-direction: column;
+    gap: var(--bf-3);
+  }
+}
+
+.bf-digital__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 4px 10px;
+  background: var(--bf-surface-active);
+  border-radius: 4px; /* Très carré */
+  font-family: var(--bf-font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--bf-text-medium);
+  letter-spacing: 0.1em;
+}
+
+.bf-digital__badge-dot {
+  width: 6px; height: 6px;
+  background: var(--dt-color-primary);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--dt-color-primary);
+}
+
+.bf-digital__title-group {
+  text-align: right;
+  @media (max-width: 640px) { text-align: left; }
+}
+
+.bf-digital__title {
+  font-size: var(--bf-text-xl);
+  font-weight: 800;
+  color: var(--bf-text);
+  margin: 0;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.bf-digital__subtitle {
+  font-size: var(--bf-text-xs);
+  color: var(--bf-muted);
+  font-weight: 500;
+  margin-top: 4px;
+  display: block;
+}
+
+/* ========================================
+   TRACK & LINE
+   ======================================== */
+.bf-digital__track-container {
+  position: relative;
+  padding: 20px 0 30px; /* Espace pour labels */
+}
+
+.bf-digital__track {
+  position: relative;
+  height: var(--dt-node-size);
+}
+
+/* Ligne de base (Grise fine) */
+.bf-digital__line-base {
+  position: absolute;
+  top: 50%; left: 0; right: 0;
+  height: var(--dt-line-h);
+  background: var(--bf-border);
+  transform: translateY(-50%);
+  z-index: 0;
+}
+
+/* Ligne de progression (Colorée) */
+.bf-digital__line-fill {
+  position: absolute;
+  top: 50%; left: 0;
+  height: var(--dt-line-h);
+  background: var(--dt-color-primary);
+  transform: translateY(-50%);
+  z-index: 1;
+  transition: width 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+  
+  /* Petit curseur lumineux au bout de la ligne */
+  &::after {
+    content: '';
+    position: absolute;
+    right: -2px; top: 50%;
+    width: 4px; height: 12px;
+    background: var(--dt-color-primary);
+    transform: translateY(-50%);
+    box-shadow: 0 0 10px var(--dt-color-primary);
+  }
+}
+
+/* ========================================
+   NODES (Carres/Losanges)
+   ======================================== */
+.bf-digital__node {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  
+  width: var(--dt-node-size);
+  height: var(--dt-node-size);
+  
+  background: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  z-index: 5;
+  
+  transition: all 0.3s ease;
+
+  /* Hover */
+  &:not([disabled]):hover {
+    z-index: 10;
+    .bf-digital__shape {
+      transform: rotate(45deg) scale(1.15);
+      border-color: var(--dt-color-primary);
+      background: var(--bf-surface-elevated);
+    }
+    .bf-digital__label {
+      opacity: 1;
+      transform: translate(-50%, 8px);
+    }
+  }
+
+  /* --- États --- */
+
+  /* DONE : Losange plein */
+  &.is-done {
+    .bf-digital__shape {
+      background: var(--dt-color-primary);
+      border-color: var(--dt-color-primary);
+      color: #fff;
+    }
+  }
+
+  /* ACTIVE : Grand losange avec contour */
+  &.is-active {
+    z-index: 6;
+    .bf-digital__shape {
+      background: var(--bf-bg);
+      border-color: var(--dt-color-primary);
+      border-width: 2px;
+      color: var(--dt-color-primary);
+      transform: rotate(45deg) scale(1.2);
+      box-shadow: 0 0 0 4px rgba(196, 22, 28, 0.1);
+    }
+    .bf-digital__label {
+      opacity: 1;
+      font-weight: 700;
+      color: var(--bf-text);
+      transform: translate(-50%, 12px);
+    }
+  }
+
+  /* LOCKED */
+  &.is-locked {
+    cursor: default;
+    .bf-digital__shape {
+      background: var(--bf-surface-active);
+      border-color: var(--bf-border);
+      color: var(--bf-muted);
+    }
+  }
+}
+
+/* Forme Géométrique (Losange via rotate) */
+.bf-digital__shape {
+  width: 100%; height: 100%;
+  background: var(--bf-surface);
+  border: 1px solid var(--bf-border-strong);
+  
+  /* La rotation crée le losange */
+  transform: rotate(45deg);
+  border-radius: 4px; /* Coins légèrement adoucis */
+  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+/* Contenu (Icone/Nombre) - Doit contrer la rotation */
+.bf-digital__number, 
+.bf-digital__icon {
+  transform: rotate(-45deg); /* Contre-rotation pour être droit */
+}
+
+.bf-digital__number {
+  font-family: var(--bf-font-mono);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.bf-digital__icon {
+  width: 14px; height: 14px;
+}
+
+/* Label sous le nœud */
+.bf-digital__label {
+  position: absolute;
+  top: 100%; left: 50%;
+  transform: translate(-50%, 4px); /* Repos */
+  width: max-content;
+  max-width: 120px;
+  text-align: center;
+  
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--bf-muted);
+  line-height: 1.2;
+  
+  opacity: 0; /* Caché par défaut sauf pour Active */
+  transition: all 0.2s ease;
+  pointer-events: none;
+  
+  /* Pour l'étape active, on force l'affichage via la classe parent .is-active */
+}
+
+/* ========================================
+   RTL SUPPORT
+   ======================================== */
+:host-context([dir="rtl"]) {
+  .bf-digital__line-fill {
+    left: auto; right: 0;
+    
+    /* Curseur inversé */
+    &::after {
+      right: auto; left: -2px;
+    }
+  }
+  
+  .bf-digital__title-group {
+    text-align: left;
+    @media (max-width: 640px) { text-align: right; }
+  }
+}
